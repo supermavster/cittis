@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetTipopuente" value="name:IdTPu;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetPaso" value="name:IdTPa;datatype:int,name:NombreTp;datatype:string" />
+	<infoitem key="UD_RecordsetSentidoP" value="name:IdSc;datatype:int,name:NombreSc;datatype:string" />
+	<infoitem key="UD_RecordsetMaterial" value="name:IdTMa;datatype:int,name:NombreTm;datatype:string" />
+</info>

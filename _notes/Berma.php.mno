@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetTcobertura" value="name:IdTc;datatype:int,name:nombreTC;datatype:string" />
+	<infoitem key="UD_RecordsetCostado" value="name:IdCo;datatype:int,name:nombreCo;datatype:string" />
+</info>

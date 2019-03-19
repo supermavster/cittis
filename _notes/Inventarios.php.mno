@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetBici" value="name:IdBc;datatype:int,name:Ancho;datatype:string,name:Localizacion;datatype:string,name:NumCarriles;datatype:int,name:IdEs;datatype:int,name:IdTs;datatype:int,name:IdSc;datatype:int,name:IdTc;datatype:int" />
+	<infoitem key="UD_RecordsetAn" value="name:IdAn;datatype:int,name:AlturaBordillo;datatype:string,name:Ancho;datatype:string,name:Obstaculos;datatype:string,name:IdO;datatype:int" />
+	<infoitem key="UD_RecordsetTv" value="name:IdTv;datatype:int,name:nombretv;datatype:string" />
+	<infoitem key="UD_RecordsetPr" value="name:IdP;datatype:int,name:nombrep;datatype:string" />
+	<infoitem key="UD_RecordsetTus" value="name:IdTus;datatype:int,name:NombreTus;datatype:string" />
+	<infoitem key="UD_RecordsetCal" value="name:IdCal;datatype:int,name:Ancho;datatype:int,name:Carriles;datatype:int,name:IdEs;datatype:int,name:IdAn;datatype:int,name:IdSc;datatype:int,name:IdTc;datatype:int" />
+	<infoitem key="UD_RecordsetSep" value="name:IdSe;datatype:int,name:Ancho;datatype:int,name:AlturaBordillo;datatype:string" />
+	<infoitem key="UD_RecordsetSum" value="name:IdSu;datatype:int,name:Distanciadesdeini;datatype:int" />
+	<infoitem key="UD_RecordsetPro" value="name:IdP;datatype:int,name:nombrep;datatype:string" />
+</info>

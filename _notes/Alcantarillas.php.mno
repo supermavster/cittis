@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetEstructura" value="name:IdEstr;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetTipo" value="name:IdTal;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetMaterial" value="name:IdMtu;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetEstado" value="name:IdEs;datatype:int,name:nombre;datatype:string" />
+	<infoitem key="UD_RecordsetLimpieza" value="name:IdLi;datatype:int,name:Nombre;datatype:string" />
+</info>

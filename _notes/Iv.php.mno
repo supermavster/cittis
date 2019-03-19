@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetTv" value="name:IdTv;datatype:int,name:nombretv;datatype:string" />
+	<infoitem key="UD_RecordsetAn" value="name:IdAn;datatype:int,name:AlturaBordillo;datatype:string,name:Ancho;datatype:string,name:Obstaculos;datatype:string,name:IdO;datatype:int" />
+	<infoitem key="UD_RecordsetPro" value="name:IdP;datatype:int,name:nombrep;datatype:string" />
+	<infoitem key="UD_RecordsetTus" value="name:IdTus;datatype:int,name:NombreTus;datatype:string" />
+	<infoitem key="UD_RecordsetBc" value="name:IdBc;datatype:int,name:Ancho;datatype:string,name:Localizacion;datatype:string,name:NumCarriles;datatype:int,name:IdEs;datatype:int,name:IdTs;datatype:int,name:IdSc;datatype:int,name:IdTc;datatype:int" />
+	<infoitem key="UD_RecordsetCal" value="name:IdCal;datatype:int,name:Ancho;datatype:int,name:Carriles;datatype:int,name:IdEs;datatype:int,name:IdAn;datatype:int,name:IdSc;datatype:int,name:IdTc;datatype:int" />
+	<infoitem key="UD_RecordsetSe" value="name:IdSe;datatype:int,name:Ancho;datatype:int,name:AlturaBordillo;datatype:string,name:SI/NO;datatype:string" />
+	<infoitem key="UD_RecordsetSu" value="name:IdSu;datatype:int,name:Distanciadesdeini;datatype:int,name:SI/NO;datatype:string" />
+	<infoitem key="UD_Recordsettus" value="name:IdTus;datatype:int,name:NombreTus;datatype:string" />
+	<infoitem key="UD_RecordsetVia" value="name:IdTv;datatype:int,name:nombretv;datatype:string" />
+	<infoitem key="UD_RecordsetProyecto" value="name:IdP;datatype:int,name:nombrep;datatype:string" />
+	<infoitem key="UD_RecordsetSuelo" value="name:IdTus;datatype:int,name:NombreTus;datatype:string" />
+	<infoitem key="UD_RecordsetSepara" value="name:IdSe;datatype:int,name:Ancho;datatype:int,name:AlturaBordillo;datatype:string,name:IdIv;datatype:int,name:IdTc;datatype:int,name:IdEs;datatype:int,name:IdTs;datatype:int" />
+	<infoitem key="UD_RecordsetSumidero" value="name:IdSu;datatype:int,name:Distanciadesdeini;datatype:int,name:IdIv;datatype:int,name:IdCo;datatype:int" />
+	<infoitem key="UD_RecordsetPer" value="name:IdPer;datatype:int,name:nombre;datatype:string,name:telefono;datatype:string,name:direccion;datatype:string,name:IdC;datatype:int" />
+</info>

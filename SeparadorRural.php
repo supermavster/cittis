@@ -1,0 +1,334 @@
+<?php require_once('Connections/Conexion.php'); ?>
+<?php
+if (!function_exists("GetSQLValueString")) {
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+{
+  if (PHP_VERSION < 6) {
+    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+  }
+
+  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+
+  switch ($theType) {
+    case "text":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;    
+    case "long":
+    case "int":
+      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+      break;
+    case "double":
+      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+      break;
+    case "date":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;
+    case "defined":
+      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+      break;
+  }
+  return $theValue;
+}
+}
+
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
+  $insertSQL = sprintf("INSERT INTO separador (IdIv, Ancho, AlturaBordillo, IdTc, IdEs, IdTs) VALUES (%s, %s, %s, %s, %s, %s)",
+                       GetSQLValueString($_POST['IdIv'], "int"),
+                       GetSQLValueString($_POST['Ancho'], "int"),
+                       GetSQLValueString($_POST['AlturaBordillo'], "text"),
+                       GetSQLValueString($_POST['IdTc'], "int"),
+                       GetSQLValueString($_POST['IdEs'], "int"),
+                       GetSQLValueString($_POST['IdTs'], "int"));
+
+  mysql_select_db($database_Conexion, $Conexion);
+  $Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+
+  $insertGoTo = "Separador.php";
+  if (isset($_SERVER['QUERY_STRING'])) {
+    $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
+    $insertGoTo .= $_SERVER['QUERY_STRING'];
+  }
+  header(sprintf("Location: %s", $insertGoTo));
+}
+
+mysql_select_db($database_Conexion, $Conexion);
+$query_RecordsetIv = "SELECT * FROM iv";
+$RecordsetIv = mysql_query($query_RecordsetIv, $Conexion) or die(mysql_error());
+$row_RecordsetIv = mysql_fetch_assoc($RecordsetIv);
+$totalRows_RecordsetIv = mysql_num_rows($RecordsetIv);
+
+mysql_select_db($database_Conexion, $Conexion);
+$query_RecordsetTc = "SELECT * FROM tipocobertura";
+$RecordsetTc = mysql_query($query_RecordsetTc, $Conexion) or die(mysql_error());
+$row_RecordsetTc = mysql_fetch_assoc($RecordsetTc);
+$totalRows_RecordsetTc = mysql_num_rows($RecordsetTc);
+
+mysql_select_db($database_Conexion, $Conexion);
+$query_RecordsetEs = "SELECT * FROM estado";
+$RecordsetEs = mysql_query($query_RecordsetEs, $Conexion) or die(mysql_error());
+$row_RecordsetEs = mysql_fetch_assoc($RecordsetEs);
+$totalRows_RecordsetEs = mysql_num_rows($RecordsetEs);
+
+mysql_select_db($database_Conexion, $Conexion);
+$query_RecordsetTs = "SELECT * FROM tiposegregacion";
+$RecordsetTs = mysql_query($query_RecordsetTs, $Conexion) or die(mysql_error());
+$row_RecordsetTs = mysql_fetch_assoc($RecordsetTs);
+$totalRows_RecordsetTs = mysql_num_rows($RecordsetTs);
+
+mysql_select_db($database_Conexion, $Conexion);
+$query_RecordsetCos = "SELECT * FROM costado";
+$RecordsetCos = mysql_query($query_RecordsetCos, $Conexion) or die(mysql_error());
+$row_RecordsetCos = mysql_fetch_assoc($RecordsetCos);
+$totalRows_RecordsetCos = mysql_num_rows($RecordsetCos);
+echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
+?><!DOCTYPE html>
+<html>
+<head>
+<title>ITTUS INVENTARIOS VIALES</title>
+<!--mobile apps-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Dream up Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--mobile apps-->
+<!--Custom Theme files -->
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="css/style.css" type="text/css" rel="stylesheet" media="all"> 
+<link rel="stylesheet" type="text/css" href="css/component.css" />
+<link href="css/estilos.css" type="text/css" rel="stylesheet" media="all"> 
+
+<!-- //Custom Theme files -->	
+
+<!--web-fonts-->
+	<link href='//fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="icon/css/fontello.css">
+<!--//web-fonts-->
+</head>
+<body>
+<p>&nbsp;</p>
+<!-- main content start-->
+     <!--start-home-->
+	<div id="home" class="header">
+			<!--start-header-->
+            <div class="header-strip w3l">
+			   <div class="container">
+			   <p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> </p>
+				<p class="phonenum two"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></p>
+<p class="phonenum two one"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><?php
+ini_set('date.timezone', 'America/Bogota');
+
+$time1 = date ('H:i:s', time());
+
+$time2 = date ('Y-m-d, H:i:s', time());
+
+
+echo date("g:i a",strtotime($time1));
+
+print '<br>';
+
+echo $time2.'<br>';
+?>
+ <?php
+// realizamos la conexión a la base de datos
+  $user = 'root'; 
+  $pass = ''; 
+  $host = 'localhost'; 
+  $db = 'inventariovial'; 
+  $config = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
+  try
+  {
+      $conn = new PDO("mysql:host=$host;dbname=$db;", $user, $pass, $config);
+  }
+  catch(PDOException $e)
+  {
+      echo $e -> getMessage();
+  }
+
+  // realizamos la consulta para obtener el mayor id insertado
+  $sql = "SELECT MAX(IdIv) AS IdIv FROM iv";
+  $query = $conn->prepare($sql);
+  $query->execute();
+  $row = $query->fetch();
+ 
+  // imprimimos el valor obtenido, en este caso el mayor id insertado en una tabla
+   
+ echo $row['IdIv'];
+ 
+ 
+?><p>&nbsp;</p>
+<p>
+				<div class="clearfix"></div>
+			  </div>
+			</div>
+		<div class="header-top w3l">
+		  <div class="container">
+		     <div class="logo"> <a href="Danos.php"> <h1><img src="images/logo.png" alt=""> ITTUS <span>Inventarios viales</span></h1>
+			 <p class="top-para"></p></a></div>
+			
+            <div class="main-nav">
+			  <span class="menu"></span>
+				  <div class="top-menu">
+							 <ul class="nav navbar-nav cl-effect-14">
+
+								
+								
+                                <li><a href="javascript:history.go(-1);">Atras</a></li>
+								<li><a href="Tunel.php" class="scroll">Agregar Tunel</a></li>
+                                <li><a href="Index.php" class="scroll">Finalizar Proceso</a></li>
+				
+							</ul>
+				</div>
+            </div>
+            <menu class="clearfix">
+    <div class="logo fab fa-hooli"></div>
+    <ul class="main-menu clearfix">
+        <li>
+            <a href="#">Calzada Urbana</a>
+            <div class="dropdown clearfix">
+                <ul>
+                    <li><a href="CalzadaUrbana.php">Urbana</a></li>
+                    <li><a href="Anden.php">Anden</a></li>
+                    <li><a href="BiciCarril.php">Bicicarril</a></li>
+                    <li><a href="Cuneta.php">Cuneta</a></li>
+                    <li><a href="Danos.php">Daños</a></li>
+                    <li><a href="Interseccion.php">Interseccion</a></li>
+                    <li><a href="listaObs.php">Obstaculos</a></li>
+                    <li><a href="listaSuelo.php">Usos de suelo</a></li>
+                    <li><a href="Puente.php">Puentes</a></li>
+                    <li><a href="Sumidero.php">Sumidero</a></li>
+                    <li><a href="Separador.php">Separador</a></li>
+                    <li><a href="pruebaseleccion.php">Prueba mapas </a></li>
+                </ul>
+               
+          </div>
+        </li>
+        
+        <li>
+            <a href="#">Calzada Rural</a>
+            <div class="dropdown clearfix">
+                <ul>
+                    <li><a href="Alcantarillas.php">Alcantarillas</a></li>
+                    <li><a href="Berma.php">Berma</a></li>
+                  
+                    <li><a href="Muros.php">Muros</a></li>
+                    <li><a href="SistemaContencion.php">Sistema de contencion</a></li>
+                    <li><a href="Cuneta.php">Cuneta</a></li>
+                    <li><a href="Peaje.php">Peaje</a></li>
+                    <li><a href="Pesaje.php">Pesaje</a></li>
+                    <li><a href="Puente.php">Puente</a></li>
+                    <li><a href="Ponton.php">Ponton</a></li>
+                    <li><a href="Talud.php">Talud</a></li>
+                    <li><a href="PuntosCriticos.php">Puntos Criticos</a></li>
+                    <li><a href="Danos.php">Daños</a></li>
+                    <li><a href="Interseccion.php">Interseccion</a></li>
+                     <li><a href="SumideroRural.php">Sumidero</a></li>
+                    <li><a href="Tunel.php">Tunel</a></li>
+                    <li><a href="Tunel.php">Tunel</a></li>
+                    
+              </ul>
+            </div>
+        </li>
+      
+        <li class="search fa fa-search"></li>
+    </ul>
+</menu>
+            <br>
+            <br>
+           <br><h1><span>Separadores</span></h1>
+            <br>
+            <br>
+            <img src="images/10GECANXXA038_BIG_CE.jpg" width="325" height="184"/>
+            <br>
+            <br>
+<br>
+            <br>
+            <br>
+            <div>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<form action="<?php echo $editFormAction; ?>" method="post" name="form2" id="form2">
+  <table align="center">
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Su Inventario es:</td>
+      <td><input type="text" name="IdIv" value="<?php echo $row['IdIv']; ?>" readonly size="32"/></td>
+    </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Ancho:</td>
+      <td><input type="text" name="Ancho" value="ej:12 Metros" onFocus="if (this.value=='ej:12 Metros') this.value='';" size="32" /></td>
+    </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">AlturaBordillo:</td>
+      <td><input type="text" name="AlturaBordillo" value="ej:12 Cm" onFocus="if (this.value=='ej:12 Cm') this.value='';" size="32" /></td>
+    </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Tipo Cobertura:</td>
+      <td><select name="IdTc">
+      <option value="Seleccione">--Seleccione una opcion--</option>
+        <?php 
+do {  
+?>
+        <option value="<?php echo $row_RecordsetTc['IdTc']?>" ><?php echo $row_RecordsetTc['nombreTC']?></option>
+        <?php
+} while ($row_RecordsetTc = mysql_fetch_assoc($RecordsetTc));
+?>
+      </select></td>
+    </tr>
+    <tr> </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Estado:</td>
+      <td><select name="IdEs">
+      <option value="Seleccione">--Seleccione una opcion--</option>
+        <?php 
+do {  
+?>
+        <option value="<?php echo $row_RecordsetEs['IdEs']?>" ><?php echo $row_RecordsetEs['nombre']?></option>
+        <?php
+} while ($row_RecordsetEs = mysql_fetch_assoc($RecordsetEs));
+?>
+      </select></td>
+    </tr>
+    <tr> </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">Tipo Segregacion:</td>
+      <td><select name="IdTs">
+      <option value="Seleccione">--Seleccione una opcion--</option>
+        <?php 
+do {  
+?>
+        <option value="<?php echo $row_RecordsetTs['IdTs']?>" ><?php echo $row_RecordsetTs['NombreTs']?></option>
+        <?php
+} while ($row_RecordsetTs = mysql_fetch_assoc($RecordsetTs));
+?>
+      </select></td>
+    </tr>
+    <tr> </tr>
+    <tr valign="baseline">
+      <td nowrap="nowrap" align="right">&nbsp;</td>
+      <td><input type="submit" value="Insertar registro" /></td>
+    </tr>
+  </table>
+  <input type="hidden" name="MM_insert" value="form2" />
+</form>
+<p>&nbsp;</p>
+</body>
+</html>
+<?php
+mysql_free_result($RecordsetIv);
+
+mysql_free_result($RecordsetTc);
+
+mysql_free_result($RecordsetEs);
+
+mysql_free_result($RecordsetTs);
+
+mysql_free_result($RecordsetCos);
+?>

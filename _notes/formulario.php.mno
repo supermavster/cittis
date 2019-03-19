@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Recordset" value="name:IdTV;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_Recordset1" value="name:IdTP;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_Recordsetes" value="name:IdES;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_Recordsetiv" value="name:IdIV;datatype:int,name:FechaINC;datatype:date,name:FechaFin;datatype:date,name:TramoIni;datatype:string,name:TramoFin;datatype:string,name:LongCuadra;datatype:string,name:persona_IdP;datatype:int,name:proyecto_IdPr;datatype:int" />
+	<infoitem key="UD_Recordsetper" value="name:IdP;datatype:int,name:NombreP;datatype:string,name:Telefono;datatype:string,name:Direccion;datatype:string,name:Documento;datatype:int" />
+	<infoitem key="UD_Recordsetpro" value="name:IdPr;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_Recordsetve" value="name:IdV;datatype:int,name:Ancho;datatype:int,name:#Carriles;datatype:int,name:Sentido;datatype:string" />
+	<infoitem key="UD_Recordsettv" value="name:IdTV;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_Recordsettp" value="name:IdTP;datatype:int,name:Nombre;datatype:string" />
+</info>

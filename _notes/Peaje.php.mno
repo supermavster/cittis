@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Recordsetrecursos" value="name:IdAp;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetOperador" value="name:IdOp;datatype:int,name:Nombre;datatype:string" />
+</info>

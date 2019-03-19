@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetEs" value="name:IdEs;datatype:int,name:nombre;datatype:string" />
+	<infoitem key="UD_RecordsetAn" value="name:IdAn;datatype:int,name:IdIv;datatype:int,name:NumeroAndenes;datatype:int,name:AlturaBordillo;datatype:string,name:Ancho;datatype:string,name:Obstaculos;datatype:string,name:IdO;datatype:int,name:costado;datatype:int" />
+	<infoitem key="UD_RecordsetSc" value="name:IdSc;datatype:int,name:NombreSc;datatype:string" />
+	<infoitem key="UD_RecordsetTc" value="name:IdTc;datatype:int,name:nombreTC;datatype:string" />
+	<infoitem key="UD_RecordsetIv" value="name:IdIv;datatype:int,name:FechaIni;datatype:date,name:FechaFin;datatype:date,name:ViaPrin;datatype:string,name:TramoIni;datatype:string,name:TramoFin;datatype:string,name:LongTramo;datatype:string,name:IdTv;datatype:int,name:IdP;datatype:int,name:IdTus;datatype:int,name:IdSe;datatype:int,name:IdSu;datatype:int" />
+</info>

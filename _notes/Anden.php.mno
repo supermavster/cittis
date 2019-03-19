@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetObs" value="name:IdO;datatype:int,name:nombreO;datatype:string" />
+	<infoitem key="UD_RecordsetCos" value="name:IdCo;datatype:int,name:nombreCo;datatype:string" />
+	<infoitem key="UD_RecordsetIv" value="name:IdIv;datatype:int,name:FechaIni;datatype:date,name:FechaFin;datatype:date,name:ViaPrin;datatype:string,name:TramoIni;datatype:string,name:TramoFin;datatype:string,name:LongTramo;datatype:string,name:IdTv;datatype:int,name:IdP;datatype:int,name:Inclinacion;datatype:string,name:IdPer;datatype:int" />
+	<infoitem key="UD_RecordsetInventario" value="name:IdIv;datatype:int,name:FechaIni;datatype:date,name:FechaFin;datatype:date,name:ViaPrin;datatype:string,name:TramoIni;datatype:string,name:TramoFin;datatype:string,name:LongTramo;datatype:string,name:IdTv;datatype:int,name:IdP;datatype:int,name:IdTus;datatype:int,name:IdSe;datatype:int,name:IdSu;datatype:int" />
+	<infoitem key="UD_RecordsetObstaculos" value="name:IdO;datatype:int,name:nombreO;datatype:string" />
+	<infoitem key="UD_RecordsetCostado" value="name:IdCo;datatype:int,name:nombreCo;datatype:string" />
+	<infoitem key="UD_Recordsetinventario" value="name:IdIv;datatype:int,name:FechaIni;datatype:date,name:FechaFin;datatype:date,name:ViaPrin;datatype:string,name:TramoIni;datatype:string,name:TramoFin;datatype:string,name:LongTramo;datatype:string,name:IdTv;datatype:int,name:IdP;datatype:int,name:IdSe;datatype:int,name:IdSu;datatype:int" />
+	<infoitem key="UD_Recordsetobs" value="name:IdO;datatype:int,name:nombreO;datatype:string" />
+	<infoitem key="UD_RecordsetList" value="name:IdList;datatype:int,name:IdAn;datatype:int,name:IdO;datatype:int" />
+	<infoitem key="UD_RecordsetEs" value="name:IdEs;datatype:int,name:nombre;datatype:string" />
+	<infoitem key="UD_RecordsetTc" value="name:IdTc;datatype:int,name:nombreTC;datatype:string" />
+</info>

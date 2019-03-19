@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetAfirmado" value="name:IdDa;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetFlexible" value="name:IdDaFe;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetRigido" value="name:IdDr;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetIv" value="name:IdIv;datatype:int,name:FechaIni;datatype:date,name:FechaFin;datatype:date,name:Direccion;datatype:string,name:ViaPrin;datatype:string,name:TramoIni;datatype:string,name:TramoFin;datatype:string,name:LongTramo;datatype:string,name:IdTv;datatype:int,name:IdP;datatype:int,name:Inclinacion;datatype:string,name:IdPer;datatype:int,name:IdPu;datatype:int,name:IdMu;datatype:int,name:IdTu;datatype:int,name:IdPes;datatype:int,name:IdCun;datatype:int,name:IdPea;datatype:int,name:IdAlc;datatype:int,name:IdPon;datatype:int,name:IdSCon;datatype:int" />
+</info>

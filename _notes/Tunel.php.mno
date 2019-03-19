@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_RecordsetServicio" value="name:IdSer;datatype:int,name:Nombre;datatype:string" />
+	<infoitem key="UD_RecordsetCalzada" value="name:IdCal;datatype:int,name:Ancho;datatype:string,name:Carriles;datatype:int,name:IdEs;datatype:int,name:IdSc;datatype:int,name:IdTc;datatype:int,name:IdIv;datatype:int,name:CalzadaParqueo;datatype:int,name:IdCat;datatype:int,name:Codigovia;datatype:string" />
+</info>
