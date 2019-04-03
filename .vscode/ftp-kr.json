@@ -11,6 +11,9 @@
     "autoDownload": true,
     "ignore": [
         ".git",
-        "/.vscode"
+        "/.vscode",
+        ".zip",
+        ".rar"
+        
     ]
 }
