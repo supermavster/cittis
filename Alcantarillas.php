@@ -140,35 +140,9 @@ echo date("g:i a",strtotime($time1));
 print '<br>';
 
 echo $time2.'<br>';
-?>
- <?php
- // TODO Fix
-/*/ realizamos la conexión a la base de datos
-  $user = 'root'; 
-  $pass = ''; 
-  $host = 'localhost'; 
-  $db = 'inventariovial'; 
-  $config = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-  try
-  {
-      $conn = new PDO("mysql:host=$host;dbname=$db;", $user, $pass, $config);
-  }
-  catch(PDOException $e)
-  {
-      echo $e -> getMessage();
-  }
 
-  // realizamos la consulta para obtener el mayor id insertado
-  $sql = "SELECT MAX(IdIv) AS IdIv FROM iv";
-  $query = $conn->prepare($sql);
-  $query->execute();
-  $row = $query->fetch();
- 
-  // imprimimos el valor obtenido, en este caso el mayor id insertado en una tabla
-   
- echo $row['IdIv'];
- 
- */
+$row = $Conexion->db_exec('fetch_row','SELECT MAX(IdIv) AS IdIv FROM iv');
+echo isset($row['IdIv'])?$row['IdIv']:0;
 ?>
 </p>
 					
