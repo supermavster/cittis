@@ -49,7 +49,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form4")) {
 
   //mysql_select_db($database_Conexion, $Conexion);
   //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
-$Result1 = $Conexion->db_exec('query',$insertSQL);  
+ 
 
   $insertGoTo = "Anden.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -74,7 +74,7 @@ $query_RecordsetEs = "SELECT * FROM estado";
 //$RecordsetEs = mysql_query($query_RecordsetEs, $Conexion) or die(mysql_error());
 $row_RecordsetEs = $Conexion->db_exec('fetch_assoc', $query_RecordsetEs);
 
-$totalRows_RecordsetEs =  $Conexion->db_exec('num_rows'$query_RecordsetEs);
+$totalRows_RecordsetEs =  $Conexion->db_exec('num_rows',$query_RecordsetEs);
 
 //mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetTc = "SELECT * FROM tipocobertura";
@@ -248,31 +248,9 @@ echo $time2.'<br>';
             <br>
             <div>
   <?php
-// realizamos la conexión a la base de datos
-  $user = 'root'; 
-  $pass = ''; 
-  $host = 'localhost'; 
-  $db = 'inventariovial'; 
-  $config = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-  try
-  {
-      $conn = new PDO("mysql:host=$host;dbname=$db;", $user, $pass, $config);
-  }
-  catch(PDOException $e)
-  {
-      echo $e -> getMessage();
-  }
 
-  // realizamos la consulta para obtener el mayor id insertado
-  $sql = "SELECT MAX(IdIv) AS IdIv FROM iv";
-  $query = $conn->prepare($sql);
-  $query->execute();
-  $row = $query->fetch();
- 
-  // imprimimos el valor obtenido, en este caso el mayor id insertado en una tabla
-   
- echo $row['IdIv'];
- 
+$row = $Conexion->db_exec('fetch_row','SELECT MAX(IdIv) AS IdIv FROM iv');
+echo isset($row['IdIv'])?$row['IdIv']:0;
  
 ?>
 </p>
@@ -470,18 +448,3 @@ do {
      <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBE6r1DjdVzEeb2-GCtVlkWLPFXnQeKKPg&callback=initialize"
     async defer></script> 
 <p>&nbsp;</p>
-<?php
-
-mysql_free_result($RecordsetList);
-
-mysql_free_result($RecordsetCos);
-
-mysql_free_result($RecordsetEs);
-
-mysql_free_result($RecordsetTc);
-
-mysql_free_result($RecordsetObs);
-
-mysql_free_result($RecordsetIv);
-
-?>
