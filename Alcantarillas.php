@@ -59,60 +59,25 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetEstructura = "SELECT * FROM estructuraalcantarilla";
-//$RecordsetEstructura = mysql_query($query_RecordsetEstructura, $Conexion) or die(mysql_error());
-//$RecordsetEstructura = $Conexion->db_exec('query', $query_RecordsetEstructura);
-$row_RecordsetEstructura = $Conexion->db_exec('fetch_assoc', $query_RecordsetEstructura); 
-//$row_RecordsetEstructura = mysql_fetch_assoc($RecordsetEstructura);
-
+$row_RecordsetEstructura = $Conexion->db_exec('fetch_assoc', $query_RecordsetEstructura);
 $totalRows_RecordsetEstructura = $Conexion->db_exec('num_rows', $query_RecordsetEstructura);
-//$totalRows_RecordsetEstructura = mysql_num_rows($RecordsetEstructura);
 
-//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetTipo = "SELECT * FROM tipoalcantarilla";
-//$RecordsetTipo = $Conexion->db_exec('query', $query_RecordsetTipo);
-//$RecordsetTipo = mysql_query($query_RecordsetTipo, $Conexion) or die(mysql_error());
-
-//$row_RecordsetTipo = mysql_fetch_assoc($RecordsetTipo);
 $row_RecordsetTipo = $Conexion->db_exec('fetch_assoc', $query_RecordsetTipo);
-
-//$totalRows_RecordsetTipo = mysql_num_rows($RecordsetTipo);
 $totalRows_RecordsetTipo = $Conexion->db_exec('num_rows', $query_RecordsetTipo);
 
-//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetMaterial = "SELECT * FROM materiatuberia";
-//$RecordsetMaterial = mysql_query($query_RecordsetMaterial, $Conexion) or die(mysql_error());
-//$query_RecordsetMaterial = $Conexion->db_exec('query', $query_RecordsetMaterial);
-
-//$row_RecordsetMaterial = mysql_fetch_assoc($RecordsetMaterial);
 $row_RecordsetMaterial = $Conexion->db_exec('fetch_assoc', $query_RecordsetMaterial);
-
-//$totalRows_RecordsetMaterial = mysql_num_rows($RecordsetMaterial);
 $totalRows_RecordsetMaterial = $Conexion->db_exec('num_rows', $query_RecordsetMaterial);
 
-//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetEstado = "SELECT * FROM estado";
-
-//$RecordsetEstado = mysql_query($query_RecordsetEstado, $Conexion) or die(mysql_error());
-//$RecordsetEstado = $Conexion->db_exec('query', $query_RecordsetEstado);
-
-//$row_RecordsetEstado = mysql_fetch_assoc($RecordsetEstado);
 $row_RecordsetEstado = $Conexion->db_exec('fetch_assoc', $query_RecordsetEstado);
-
-//$totalRows_RecordsetEstado = mysql_num_rows($RecordsetEstado);
 $totalRows_RecordsetEstado = $Conexion->db_exec('num_rows', $query_RecordsetEstado);
 
-//mysql_select_db($database_Conexion, $Conexion);
+
 $query_RecordsetLimpieza = "SELECT * FROM limpieza";
-
-//$RecordsetLimpieza = mysql_query($query_RecordsetLimpieza, $Conexion) or die(mysql_error());
-//$RecordsetLimpieza = $Conexion->db_exec('query', $query_RecordsetLimpieza);
-
-//$row_RecordsetLimpieza = mysql_fetch_assoc($RecordsetLimpieza);
 $row_RecordsetLimpieza = $Conexion->db_exec('fetch_assoc', $query_RecordsetLimpieza);
-
-//$totalRows_RecordsetLimpieza = mysql_num_rows($RecordsetLimpieza);
 $totalRows_RecordsetLimpieza = $Conexion->db_exec('num_rows', $query_RecordsetLimpieza);
 
 echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
