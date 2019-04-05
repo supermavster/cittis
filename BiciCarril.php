@@ -46,10 +46,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['IdSc'], "int"),
                        GetSQLValueString($_POST['IdTc'], "int"));
 
-  //mysql_select_db($database_Conexion, $Conexion);
-  //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
-  $Result1 = $Conexion->db_exec('query', $insertSQL);
-
+ 
   $insertGoTo = "Index.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
@@ -69,10 +66,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form3")) {
                        GetSQLValueString($_POST['IdTc'], "int"),
                        GetSQLValueString($_POST['IdIv'], "int"));
 
-  //mysql_select_db($database_Conexion, $Conexion);
-  //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
-  $Result1 = $Conexion->db_exec('query', $insertSQL);
-
+ 
   $insertGoTo = "Index.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
@@ -83,7 +77,7 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form3")) {
 
 $query_RecordsetEs = "SELECT * FROM estado";
 $row_RecordsetEs =  $Conexion->db_exec('fetch_assoc',$query_RecordsetEs);
-$totalRows_RecordsetEs =  $Conexion->db_exec('num_rows',$RecordsetEs);
+$totalRows_RecordsetEs =  $Conexion->db_exec('num_rows',$query_RecordsetEs);
 
 $query_RecordsetTs = "SELECT * FROM tiposegregacion";
 $row_RecordsetTs =  $Conexion->db_exec('fetch_assoc',$query_RecordsetTs);
