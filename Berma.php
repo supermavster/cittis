@@ -42,9 +42,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form3")) {
                        GetSQLValueString($_POST['IdTc'], "int"),
                        GetSQLValueString($_POST['IdCo'], "int"));
 
-  mysql_select_db($database_Conexion, $Conexion);
-  $Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
-
+  //mysql_select_db($database_Conexion, $Conexion);
+  //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+  $Result1 = $Conexion->db_exec('query', $insertSQL);
   $insertGoTo = "Berma.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $insertGoTo .= (strpos($insertGoTo, '?')) ? "&" : "?";
@@ -53,17 +53,15 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form3")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_Conexion, $Conexion);
-$query_RecordsetTcobertura = "SELECT * FROM tipocobertura";
-$RecordsetTcobertura = mysql_query($query_RecordsetTcobertura, $Conexion) or die(mysql_error());
-$row_RecordsetTcobertura = mysql_fetch_assoc($RecordsetTcobertura);
-$totalRows_RecordsetTcobertura = mysql_num_rows($RecordsetTcobertura);
 
-mysql_select_db($database_Conexion, $Conexion);
+$query_RecordsetTcobertura = "SELECT * FROM tipocobertura";
+$row_RecordsetTcobertura = $Conexion->db_exec('fetch_assoc',$query_RecordsetTcobertura);
+$totalRows_RecordsetTcobertura = $Conexion->db_exec('num_rows',$query_RecordsetTcobertura);
+
+
 $query_RecordsetCostado = "SELECT * FROM costado";
-$RecordsetCostado = mysql_query($query_RecordsetCostado, $Conexion) or die(mysql_error());
-$row_RecordsetCostado = mysql_fetch_assoc($RecordsetCostado);
-$totalRows_RecordsetCostado = mysql_num_rows($RecordsetCostado);
+$row_RecordsetCostado = $Conexion->db_exec('fetch_assoc',$query_RecordsetCostado);
+$totalRows_RecordsetCostado = $Conexion->db_exec('num_rows',$query_RecordsetCostado);
 echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
 ?>
 <!DOCTYPE html>
@@ -120,34 +118,8 @@ echo date("g:i a",strtotime($time1));
 print '<br>';
 
 echo $time2.'<br>';
-?>
- <?php
-// realizamos la conexión a la base de datos
-  $user = 'root'; 
-  $pass = ''; 
-  $host = 'localhost'; 
-  $db = 'inventariovial'; 
-  $config = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-  try
-  {
-      $conn = new PDO("mysql:host=$host;dbname=$db;", $user, $pass, $config);
-  }
-  catch(PDOException $e)
-  {
-      echo $e -> getMessage();
-  }
-
-  // realizamos la consulta para obtener el mayor id insertado
-  $sql = "SELECT MAX(IdIv) AS IdIv FROM iv";
-  $query = $conn->prepare($sql);
-  $query->execute();
-  $row = $query->fetch();
- 
-  // imprimimos el valor obtenido, en este caso el mayor id insertado en una tabla
-   
- echo $row['IdIv'];
- 
- 
+$row = $Conexion->db_exec('fetch_row','SELECT MAX(IdIv) AS IdIv FROM iv');
+echo isset($row['IdIv'])?$row['IdIv']:0;
 ?>
 </p>
 					
@@ -379,8 +351,3 @@ do {
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
-<?php
-mysql_free_result($RecordsetTcobertura);
-
-mysql_free_result($RecordsetCostado);
-?>
