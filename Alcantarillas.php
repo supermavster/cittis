@@ -46,8 +46,10 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
                        GetSQLValueString($_POST['IdEs'], "int"),
                        GetSQLValueString($_POST['IdLi'], "int"));
 
-  mysql_select_db($database_Conexion, $Conexion);
-  $Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+  //mysql_select_db($database_Conexion, $Conexion);
+  //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+  $Result1 = $Conexion->db_exec('query', $insertSQL);
+
 
   $insertGoTo = "Alcantarillas.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -57,35 +59,63 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_Conexion, $Conexion);
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetEstructura = "SELECT * FROM estructuraalcantarilla";
-$RecordsetEstructura = mysql_query($query_RecordsetEstructura, $Conexion) or die(mysql_error());
-$row_RecordsetEstructura = mysql_fetch_assoc($RecordsetEstructura);
-$totalRows_RecordsetEstructura = mysql_num_rows($RecordsetEstructura);
+//$RecordsetEstructura = mysql_query($query_RecordsetEstructura, $Conexion) or die(mysql_error());
+$RecordsetEstructura = $Conexion->db_exec('query', $query_RecordsetEstructura);
 
-mysql_select_db($database_Conexion, $Conexion);
+$row_RecordsetEstructura = $Conexion->db_exec('fetch_assoc', $RecordsetEstructura);
+
+exit($row_RecordsetEstructura);
+//$row_RecordsetEstructura = mysql_fetch_assoc($RecordsetEstructura);
+$totalRows_RecordsetEstructura = $Conexion->db_exec('num_rows', $RecordsetEstructura);
+//$totalRows_RecordsetEstructura = mysql_num_rows($RecordsetEstructura);
+
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetTipo = "SELECT * FROM tipoalcantarilla";
-$RecordsetTipo = mysql_query($query_RecordsetTipo, $Conexion) or die(mysql_error());
-$row_RecordsetTipo = mysql_fetch_assoc($RecordsetTipo);
-$totalRows_RecordsetTipo = mysql_num_rows($RecordsetTipo);
+$RecordsetTipo = $Conexion->db_exec('query', $query_RecordsetTipo);
+//$RecordsetTipo = mysql_query($query_RecordsetTipo, $Conexion) or die(mysql_error());
 
-mysql_select_db($database_Conexion, $Conexion);
+//$row_RecordsetTipo = mysql_fetch_assoc($RecordsetTipo);
+$row_RecordsetTipo = $Conexion->db_exec('fetch_assoc', $RecordsetTipo);
+//$totalRows_RecordsetTipo = mysql_num_rows($RecordsetTipo);
+$totalRows_RecordsetTipo = $Conexion->db_exec('num_rows', $RecordsetTipo);
+
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetMaterial = "SELECT * FROM materiatuberia";
-$RecordsetMaterial = mysql_query($query_RecordsetMaterial, $Conexion) or die(mysql_error());
-$row_RecordsetMaterial = mysql_fetch_assoc($RecordsetMaterial);
-$totalRows_RecordsetMaterial = mysql_num_rows($RecordsetMaterial);
+//$RecordsetMaterial = mysql_query($query_RecordsetMaterial, $Conexion) or die(mysql_error());
+$query_RecordsetMaterial = $Conexion->db_exec('query', $query_RecordsetMaterial);
 
-mysql_select_db($database_Conexion, $Conexion);
+//$row_RecordsetMaterial = mysql_fetch_assoc($RecordsetMaterial);
+$row_RecordsetMaterial = $Conexion->db_exec('fetch_assoc', $RecordsetMaterial);
+
+//$totalRows_RecordsetMaterial = mysql_num_rows($RecordsetMaterial);
+$totalRows_RecordsetMaterial = $Conexion->db_exec('num_rows', $RecordsetMaterial);
+
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetEstado = "SELECT * FROM estado";
-$RecordsetEstado = mysql_query($query_RecordsetEstado, $Conexion) or die(mysql_error());
-$row_RecordsetEstado = mysql_fetch_assoc($RecordsetEstado);
-$totalRows_RecordsetEstado = mysql_num_rows($RecordsetEstado);
 
-mysql_select_db($database_Conexion, $Conexion);
+//$RecordsetEstado = mysql_query($query_RecordsetEstado, $Conexion) or die(mysql_error());
+$RecordsetEstado = $Conexion->db_exec('query', $query_RecordsetEstado);
+
+//$row_RecordsetEstado = mysql_fetch_assoc($RecordsetEstado);
+$row_RecordsetEstado = $Conexion->db_exec('fetch_assoc', $RecordsetEstado);
+
+//$totalRows_RecordsetEstado = mysql_num_rows($RecordsetEstado);
+$totalRows_RecordsetEstado = $Conexion->db_exec('num_rows', $RecordsetEstado);
+
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetLimpieza = "SELECT * FROM limpieza";
-$RecordsetLimpieza = mysql_query($query_RecordsetLimpieza, $Conexion) or die(mysql_error());
-$row_RecordsetLimpieza = mysql_fetch_assoc($RecordsetLimpieza);
-$totalRows_RecordsetLimpieza = mysql_num_rows($RecordsetLimpieza);
+
+//$RecordsetLimpieza = mysql_query($query_RecordsetLimpieza, $Conexion) or die(mysql_error());
+$RecordsetLimpieza = $Conexion->db_exec('query', $query_RecordsetLimpieza);
+
+//$row_RecordsetLimpieza = mysql_fetch_assoc($RecordsetLimpieza);
+$row_RecordsetLimpieza = $Conexion->db_exec('fetch_assoc', $RecordsetLimpieza);
+
+//$totalRows_RecordsetLimpieza = mysql_num_rows($RecordsetLimpieza);
+$totalRows_RecordsetLimpieza = $Conexion->db_exec('num_rows', $RecordsetLimpieza);
+
 echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
 ?>
 <!DOCTYPE html>
@@ -148,7 +178,8 @@ print '<br>';
 echo $time2.'<br>';
 ?>
  <?php
-// realizamos la conexión a la base de datos
+ // TODO Fix
+/*/ realizamos la conexión a la base de datos
   $user = 'root'; 
   $pass = ''; 
   $host = 'localhost'; 
@@ -173,7 +204,7 @@ echo $time2.'<br>';
    
  echo $row['IdIv'];
  
- 
+ */
 ?>
 </p>
 					
@@ -453,6 +484,7 @@ do {
                  });</script>
 <p>&nbsp;</p>
 <?php
+/*
 mysql_free_result($RecordsetEstructura);
 
 mysql_free_result($RecordsetTipo);
@@ -461,5 +493,5 @@ mysql_free_result($RecordsetMaterial);
 
 mysql_free_result($RecordsetEstado);
 
-mysql_free_result($RecordsetLimpieza);
+mysql_free_result($RecordsetLimpieza);*/
 ?>

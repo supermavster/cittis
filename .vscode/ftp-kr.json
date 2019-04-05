@@ -6,9 +6,9 @@
     "protocol": "ftps",
     "port": 21,
     "fileNameEncoding": "utf8",
-    "autoUpload": false,
-    "autoDelete": false,
-    "autoDownload": true,
+    "autoUpload": true,
+    "autoDelete": true,
+    "autoDownload": false,
     "ignore": [
         ".git",
         "/.vscode",
