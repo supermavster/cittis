@@ -1,0 +1,19 @@
+{
+    "host": "ftp.cittis.com.co",
+    "username": "FTPSystemsTeamCittis@iv.cittis.com.co",
+    "password": "ja4eQin47w?6%U-5*4",
+    "remotePath": "/",
+    "protocol": "ftps",
+    "port": 21,
+    "fileNameEncoding": "utf8",
+    "autoUpload": false,
+    "autoDelete": false,
+    "autoDownload": true,
+    "ignore": [
+        ".git",
+        "/.vscode",
+        ".zip",
+        ".rar"
+        
+    ]
+}
