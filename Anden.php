@@ -47,8 +47,9 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form4")) {
                        GetSQLValueString($_POST['NumeroObstaculos'], "int"),
                        GetSQLValueString($_POST['IdEs'], "int"));
 
-  mysql_select_db($database_Conexion, $Conexion);
-  $Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+  //mysql_select_db($database_Conexion, $Conexion);
+  //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+$Result1 = $Conexion->db_exec('query',$insertSQL);  
 
   $insertGoTo = "Anden.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -58,10 +59,12 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form4")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_Conexion, $Conexion);
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetIv = "SELECT * FROM iv";
-$RecordsetIv = mysql_query($query_RecordsetIv, $Conexion) or die(mysql_error());
-$row_RecordsetIv = mysql_fetch_assoc($RecordsetIv);
+//$RecordsetIv = mysql_query($query_RecordsetIv, $Conexion) or die(mysql_error());
+$RecordsetIv = $Conexion->db_exec('query',$query_RecordsetIv);
+//$row_RecordsetIv = mysql_fetch_assoc($RecordsetIv);
+
 $totalRows_RecordsetIv = mysql_num_rows($RecordsetIv);
 
 mysql_select_db($database_Conexion, $Conexion);
