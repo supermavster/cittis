@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="724eb3d5-44fd-41e8-8f55-dee63071d38b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.vscode/ftp-kr.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/ftp-kr.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Alcantarillas.php" beforeDir="false" afterPath="$PROJECT_DIR$/Alcantarillas.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Alcantarillas.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="144" column="40" selection-start-line="144" selection-start-column="40" selection-end-line="144" selection-end-column="40" />
+            <state relative-caret-position="1414">
+              <caret line="433" column="2" lean-forward="true" selection-start-line="433" selection-start-column="2" selection-end-line="433" selection-end-column="2" />
               <folding>
                 <element signature="e#57#1018#0#PHP" />
                 <element signature="e#102#1016#0#PHP" />
@@ -39,6 +38,10 @@
                 <element signature="e#0#30#2" />
                 <element signature="e#0#20#2" />
                 <element signature="e#0#22#2" />
+                <element signature="e#5429#5660#0#HTML" />
+                <element signature="e#8867#9447#0#HTML" />
+                <element signature="e#9448#11872#0#HTML" />
+                <element signature="e#12107#15294#0#HTML" />
               </folding>
             </state>
           </provider>
@@ -147,19 +150,19 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1193000" />
+    <option name="totallyTimeSpent" value="1950000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="PHP-CGI Server" />
       <window_info anchor="bottom" id="Database Changes" />
-      <window_info active="true" anchor="bottom" id="Version Control" sideWeight="0.49946696" visible="true" weight="0.32917964" />
+      <window_info anchor="bottom" id="Version Control" sideWeight="0.49946696" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32917964" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -199,8 +202,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Alcantarillas.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="144" column="40" selection-start-line="144" selection-start-column="40" selection-end-line="144" selection-end-column="40" />
+        <state relative-caret-position="1414">
+          <caret line="433" column="2" lean-forward="true" selection-start-line="433" selection-start-column="2" selection-end-line="433" selection-end-column="2" />
           <folding>
             <element signature="e#57#1018#0#PHP" />
             <element signature="e#102#1016#0#PHP" />
@@ -222,6 +225,10 @@
             <element signature="e#0#30#2" />
             <element signature="e#0#20#2" />
             <element signature="e#0#22#2" />
+            <element signature="e#5429#5660#0#HTML" />
+            <element signature="e#8867#9447#0#HTML" />
+            <element signature="e#9448#11872#0#HTML" />
+            <element signature="e#12107#15294#0#HTML" />
           </folding>
         </state>
       </provider>
