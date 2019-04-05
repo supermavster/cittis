@@ -47,8 +47,8 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
                        GetSQLValueString($_POST['IdIv'], "int"),
                        GetSQLValueString($_POST['CalzadaParqueo'], "int"));
 
-  mysql_select_db($database_Conexion, $Conexion);
-  $Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
+  //mysql_select_db($database_Conexion, $Conexion);
+  //$Result1 = mysql_query($insertSQL, $Conexion) or die(mysql_error());
 
   $insertGoTo = "InicioCicloRuta.php";
   if (isset($_SERVER['QUERY_STRING'])) {
@@ -58,29 +58,21 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form2")) {
   header(sprintf("Location: %s", $insertGoTo));
 }
 
-mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetEs = "SELECT * FROM estado";
-$RecordsetEs = mysql_query($query_RecordsetEs, $Conexion) or die(mysql_error());
-$row_RecordsetEs = mysql_fetch_assoc($RecordsetEs);
-$totalRows_RecordsetEs = mysql_num_rows($RecordsetEs);
+$row_RecordsetEs = $Conexion->db_exec('fetch_assoc',$query_RecordsetEs);
+$totalRows_RecordsetEs = $Conexion->db_exec('num_rows',$query_RecordsetEs);
 
-mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetSc = "SELECT * FROM sentidocirculacion";
-$RecordsetSc = mysql_query($query_RecordsetSc, $Conexion) or die(mysql_error());
-$row_RecordsetSc = mysql_fetch_assoc($RecordsetSc);
-$totalRows_RecordsetSc = mysql_num_rows($RecordsetSc);
+$row_RecordsetSc = $Conexion->db_exec('fetch_assoc',$query_RecordsetSc);
+$totalRows_RecordsetSc = $Conexion->db_exec('num_rows',$query_RecordsetSc);
 
-mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetTc = "SELECT * FROM tipocobertura";
-$RecordsetTc = mysql_query($query_RecordsetTc, $Conexion) or die(mysql_error());
-$row_RecordsetTc = mysql_fetch_assoc($RecordsetTc);
-$totalRows_RecordsetTc = mysql_num_rows($RecordsetTc);
+$row_RecordsetTc = $Conexion->db_exec('fetch_assoc',$query_RecordsetTc);
+$totalRows_RecordsetTc = $Conexion->db_exec('num_rows',$query_RecordsetTc);
 
-mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetIv = "SELECT * FROM iv";
-$RecordsetIv = mysql_query($query_RecordsetIv, $Conexion) or die(mysql_error());
-$row_RecordsetIv = mysql_fetch_assoc($RecordsetIv);
-$totalRows_RecordsetIv = mysql_num_rows($RecordsetIv);
+$row_RecordsetIv = $Conexion->db_exec('fetch_assoc',$query_RecordsetIv);
+$totalRows_RecordsetIv = $Conexion->db_exec('num_rows',$query_RecordsetIv);
 echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
 ?>
 <!DOCTYPE html>
@@ -136,34 +128,8 @@ echo date("g:i a",strtotime($time1));
 print '<br>';
 
 echo $time2.'<br>';
-?>
- <?php
-// realizamos la conexión a la base de datos
-  $user = 'root'; 
-  $pass = ''; 
-  $host = 'localhost'; 
-  $db = 'inventariovial'; 
-  $config = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-  try
-  {
-      $conn = new PDO("mysql:host=$host;dbname=$db;", $user, $pass, $config);
-  }
-  catch(PDOException $e)
-  {
-      echo $e -> getMessage();
-  }
-
-  // realizamos la consulta para obtener el mayor id insertado
-  $sql = "SELECT MAX(IdIv) AS IdIv FROM iv";
-  $query = $conn->prepare($sql);
-  $query->execute();
-  $row = $query->fetch();
- 
-  // imprimimos el valor obtenido, en este caso el mayor id insertado en una tabla
-   
- echo $row['IdIv'];
- 
- 
+$row = $Conexion->db_exec('fetch_row','SELECT MAX(IdIv) AS IdIv FROM iv');
+echo isset($row['IdIv'])?$row['IdIv']:0;
 ?>
 </p>
 					
@@ -447,13 +413,5 @@ var spryselect3 = new Spry.Widget.ValidationSelect("spryselect3");
 </script>
 </body>
 </html>
-<?php
-mysql_free_result($RecordsetEs);
 
-mysql_free_result($RecordsetSc);
-
-mysql_free_result($RecordsetTc);
-
-mysql_free_result($RecordsetIv);
-?>
 </div>
