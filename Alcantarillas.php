@@ -117,6 +117,24 @@ body,td,th {
 <script src="SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
 <script src="SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
 <script src="SpryAssets/SpryValidationCheckbox.js" type="text/javascript"></script>
+    <style>
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            width: 500px;
+            height: 500px;
+        }
+
+        #coords {
+            width: 500px;
+        }
+    </style>
+
 </head>
 <body background="Alcantarilla.jpg">
 	<!-- main content start-->
@@ -322,25 +340,9 @@ do {
 
   <input type="hidden" name="MM_insert" value="form1">
 </form>
- 
- <style>
-      html, body, #map {
-        height: 100%; 
-		width:100%;
-        margin: 0px;
-        padding: 0px;
-	  }
-          #map {
-        width: 500px;
-        height: 500px;
-      }
-      #coords{width: 500px;}  
-    </style>	
-    				
-  </head>
-  <body>
-   
-   <div id="map">
+
+
+    <div id="map">
     
    </div> 
    <br>
