@@ -62,43 +62,47 @@ $Result1 = $Conexion->db_exec('query',$insertSQL);
 //mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetIv = "SELECT * FROM iv";
 //$RecordsetIv = mysql_query($query_RecordsetIv, $Conexion) or die(mysql_error());
-$RecordsetIv = $Conexion->db_exec('query',$query_RecordsetIv);
+$row_RecordsetIv = $Conexion->db_exec('fetch_assoc',$query_RecordsetIv);
+
 //$row_RecordsetIv = mysql_fetch_assoc($RecordsetIv);
 
-$totalRows_RecordsetIv = mysql_num_rows($RecordsetIv);
 
-mysql_select_db($database_Conexion, $Conexion);
+$totalRows_RecordsetIv = $Conexion->db_exec('num_rows',$query_RecordsetIv);
+
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetEs = "SELECT * FROM estado";
-$RecordsetEs = mysql_query($query_RecordsetEs, $Conexion) or die(mysql_error());
-$row_RecordsetEs = mysql_fetch_assoc($RecordsetEs);
-$totalRows_RecordsetEs = mysql_num_rows($RecordsetEs);
+//$RecordsetEs = mysql_query($query_RecordsetEs, $Conexion) or die(mysql_error());
+$row_RecordsetEs = $Conexion->db_exec('fetch_assoc', $query_RecordsetEs);
 
-mysql_select_db($database_Conexion, $Conexion);
+$totalRows_RecordsetEs =  $Conexion->db_exec('num_rows'$query_RecordsetEs);
+
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetTc = "SELECT * FROM tipocobertura";
-$RecordsetTc = mysql_query($query_RecordsetTc, $Conexion) or die(mysql_error());
-$row_RecordsetTc = mysql_fetch_assoc($RecordsetTc);
-$totalRows_RecordsetTc = mysql_num_rows($RecordsetTc);
+//$RecordsetTc = mysql_query($query_RecordsetTc, $Conexion) or die(mysql_error());
+//$row_RecordsetTc = mysql_fetch_assoc($RecordsetTc);
+$row_RecordsetTc = $Conexion->db_exec('fetch_assoc',$query_RecordsetTc);
+$totalRows_RecordsetTc = $Conexion->db_exec('num_rows',$query_RecordsetTc);
 
-mysql_select_db($database_Conexion, $Conexion);
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetObs = "SELECT * FROM obstaculos";
-$RecordsetObs = mysql_query($query_RecordsetObs, $Conexion) or die(mysql_error());
-$row_RecordsetObs = mysql_fetch_assoc($RecordsetObs);
-$totalRows_RecordsetObs = mysql_num_rows($RecordsetObs);
+//$RecordsetObs = mysql_query($query_RecordsetObs, $Conexion) or die(mysql_error());
+$row_RecordsetObs = $Conexion->db_exec('fetch_assoc',$query_RecordsetObs);
+$totalRows_RecordsetObs = $Conexion->db_exec('num_rows',$query_RecordsetObs);
 
-mysql_select_db($database_Conexion, $Conexion);
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetList = "SELECT * FROM listaobstaculos";
-$RecordsetList = mysql_query($query_RecordsetList, $Conexion) or die(mysql_error());
-$row_RecordsetList = mysql_fetch_assoc($RecordsetList);
-$totalRows_RecordsetList = mysql_num_rows($RecordsetList);
+//$RecordsetList = mysql_query($query_RecordsetList, $Conexion) or die(mysql_error());
+$row_RecordsetList = $Conexion->db_exec('fetch_assoc',$query_RecordsetList);
+$totalRows_RecordsetList = $Conexion->db_exec('num_rows',$query_RecordsetList);
 
-mysql_select_db($database_Conexion, $Conexion);
+//mysql_select_db($database_Conexion, $Conexion);
 $query_RecordsetCos = "SELECT * FROM costado";
-$RecordsetCos = mysql_query($query_RecordsetCos, $Conexion) or die(mysql_error());
-$row_RecordsetCos = mysql_fetch_assoc($RecordsetCos);
-$totalRows_RecordsetCos = mysql_num_rows($RecordsetCos);
+//$RecordsetCos = mysql_query($query_RecordsetCos, $Conexion) or die(mysql_error());
+$row_RecordsetCos = $Conexion->db_exec('fetch_assoc',$query_RecordsetCos);
+$totalRows_RecordsetCos = $Conexion->db_exec('num_rows',$query_RecordsetCos);
 echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
 ?>
-<?php require_once('Connections/Conexion.php'); ?>
+
 <p>&nbsp;</p>
 <!DOCTYPE html>
 <html>
