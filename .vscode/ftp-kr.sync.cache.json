@@ -1,0 +1,154 @@
+{
+  "ftps://ftp.cittis.com.co:21@FTPSystemsTeamCittis@iv.cittis.com.co": {
+    ".ftpquota": {
+      "type": "-",
+      "size": 4,
+      "lmtime": 0,
+      "modified": false
+    },
+    ".gitignore": {
+      "type": "-",
+      "size": 157,
+      "lmtime": 0,
+      "modified": false
+    },
+    ".well-known": {},
+    "Alcantarillas.php": {
+      "type": "-",
+      "size": 18118,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Anden.php": {
+      "type": "-",
+      "size": 18418,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Berma.php": {
+      "type": "-",
+      "size": 14815,
+      "lmtime": 0,
+      "modified": false
+    },
+    "BiciCarril.php": {
+      "type": "-",
+      "size": 21047,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Calzada.php": {
+      "type": "-",
+      "size": 18220,
+      "lmtime": 0,
+      "modified": false
+    },
+    "CalzadaUrbana.php": {
+      "type": "-",
+      "size": 17718,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Classes": {},
+    "Conexiones.php": {
+      "type": "-",
+      "size": 465,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Connections": {},
+    "Cuneta.php": {
+      "type": "-",
+      "size": 17921,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Danos.php": {
+      "type": "-",
+      "size": 16454,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Index.php": {
+      "type": "-",
+      "size": 9554,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Inicial.php": {
+      "type": "-",
+      "size": 5476,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Interseccion.php": {
+      "type": "-",
+      "size": 14542,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Iv.php": {
+      "type": "-",
+      "size": 16244,
+      "lmtime": 0,
+      "modified": false
+    },
+    "Reportes": {},
+    "abrir_conexion.php": {
+      "type": "-",
+      "size": 614,
+      "lmtime": 0,
+      "modified": false
+    },
+    "cerrar_conexion.php": {
+      "type": "-",
+      "size": 36,
+      "lmtime": 0,
+      "modified": false
+    },
+    "conex.php": {
+      "type": "-",
+      "size": 414,
+      "lmtime": 0,
+      "modified": false
+    },
+    "css": {},
+    "css2": {},
+    "cssl": {},
+    "desktop.ini": {
+      "type": "-",
+      "size": 42,
+      "lmtime": 0,
+      "modified": false
+    },
+    "dream_up-web_Free22-12-2016_117632099 (1).zip": {
+      "type": "-",
+      "size": 2236264,
+      "lmtime": 0,
+      "modified": false
+    },
+    "fonts": {},
+    "fonts2": {},
+    "formulario.php": {
+      "type": "-",
+      "size": 682,
+      "lmtime": 0,
+      "modified": false
+    },
+    "iajax.php": {
+      "type": "-",
+      "size": 1125,
+      "lmtime": 0,
+      "modified": false
+    },
+    "images": {},
+    "inventariovial (2).sql": {
+      "type": "-",
+      "size": 53703,
+      "lmtime": 0,
+      "modified": false
+    },
+    "js": {}
+  },
+  "$version": 1
+}
