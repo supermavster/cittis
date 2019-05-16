@@ -1,81 +1,7 @@
-<?php require_once('Connections/Conexion.php'); ?>
-<?php
-//initialize the session
-if (!isset($_SESSION)) {
-  session_start();
-}
-
-// ** Logout the current user. **
-$logoutAction = $_SERVER['PHP_SELF']."?doLogout=true";
-if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")){
-  $logoutAction .="&". htmlentities($_SERVER['QUERY_STRING']);
-}
-
-if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
-  //to fully log out a visitor we need to clear the session varialbles
-  $_SESSION['MM_Username'] = NULL;
-  $_SESSION['MM_UserGroup'] = NULL;
-  $_SESSION['PrevUrl'] = NULL;
-  unset($_SESSION['MM_Username']);
-  unset($_SESSION['MM_UserGroup']);
-  unset($_SESSION['PrevUrl']);
-	
-  $logoutGoTo = "Login.php";
-  if ($logoutGoTo) {
-    header("Location: $logoutGoTo");
-    exit;
-  }
-}
-?>
-<?php
-if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
-{
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-  }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
-  switch ($theType) {
-    case "text":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
-    case "long":
-    case "int":
-      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-      break;
-    case "double":
-      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-      break;
-    case "date":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;
-    case "defined":
-      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-      break;
-  }
-  return $theValue;
-}
-}
-
-mysql_select_db($database_Conexion, $Conexion);
-$query_RecordsetIv = "SELECT * FROM iv";
-$RecordsetIv = mysql_query($query_RecordsetIv, $Conexion) or die(mysql_error());
-$row_RecordsetIv = mysql_fetch_assoc($RecordsetIv);
-$totalRows_RecordsetIv = mysql_num_rows($RecordsetIv);
-echo "<script type=\"text/javascript\">alert(\"Insercion Correcta\");</script>";
-?>
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 <head>
-<title>ITTUS INVENTARIOS VIALES</title>
+<title>Pagina Inicial</title>
 <!--mobile apps-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -97,18 +23,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--//web-fonts-->
 
 </head>
-<body>
 
-<p>&nbsp;<a href="<?php echo $logoutAction ?>">Desconectar</a></p>
-<!-- main content start-->
+<body background="images/Ittus.jpg">
+	<!-- main content start-->
      <!--start-home-->
 	<div id="home" class="header">
 			<!--start-header-->
             <div class="header-strip w3l">
 			   <div class="container">
-			   <p class="phonenum"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> </p>
-				<p class="phonenum two"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> </p>
-<p class="phonenum two one"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><?php
+		
+<?php
 ini_set('date.timezone', 'America/Bogota');
 
 $time1 = date ('H:i:s', time());
@@ -122,58 +46,28 @@ print '<br>';
 
 echo $time2.'<br>';
 ?>
-<?php 
-  // realizamos la conexión a la base de datos
-  $user = 'root'; 
-  $pass = ''; 
-  $host = 'localhost'; 
-  $db = 'inventariovial'; 
-  $config = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'");
-  try
-  {
-      $conn = new PDO("mysql:host=$host;dbname=$db;", $user, $pass, $config);
-  }
-  catch(PDOException $e)
-  {
-      echo $e -> getMessage();
-  }
-   
-  // realizamos la consulta para obtener el mayor id insertado
-  $sql = "SELECT MAX(IdIv) AS IdIv FROM iv";
-  $query = $conn->prepare($sql);
-  $query->execute();
-  $row = $query->fetch();
- 
-  // imprimimos el valor obtenido, en este caso el mayor id insertado en una tabla
-  echo $row['IdIv'];
- ?>
- 
-  </div>
 
-   
-<div class="clearfix"></div>
+					
+
+				<div class="clearfix"></div>
 			  </div>
 			</div>
 		<div class="header-top w3l">
 		  <div class="container">
-		     <div class="logo"> </div>
+		     <div class="logo"> <a href=""> <h1><img src="images/logo.png" alt=""> ITTUS Consultores<span>S.A.S</span></h1>
+			 <p class="top-para"></p></a></div>
 			
             <div class="main-nav">
 			  <span class="menu"></span>
 				  <div class="top-menu">
 							 <ul class="nav navbar-nav cl-effect-14">
-                            
- <tr valign="baseline">
-      <td nowrap align="right">&nbsp;</td>
-      <td>&nbsp;</td>
-</tr>
-<li class="active"><a href="Inicial.php">Inicio</a></li>
-<li><a href="javascript:history.go(-1);">Atras</a></li>
-<li>
-	
-		<div class="clearfix"></div>
-</div>
-<menu class="clearfix">
+
+								
+								<li><a href="Iv.php" class="scroll">Empezar </a></li>
+								
+								
+							</ul>
+               <menu class="clearfix">
     <div class="logo fab fa-hooli"></div>
     <ul class="main-menu clearfix">
         <li>
@@ -227,50 +121,30 @@ echo $time2.'<br>';
     </ul>
 </menu>
 
-<p>&nbsp;</p>
+	<!--End-top-nav-script-->
+		<!--//end-header-->
+		<div class="clearfix"></div>
+    </div>
 	</div>
-    <div>
-  <form action="Index.php" method="post">
- <tr valign="baseline">
-      <td nowrap="nowrap" align="right">Su Inventario es:</td>
-      <td><input type="text" name="IdIv" id="IdIv" value="<?php echo $row['IdIv']; ?>" readonly size="32"/></td>
-    </tr>
- <tr valign="baseline">
-      <td nowrap align="right">FechaFin:</td>
-      <td><input type="text" name="FechaFin" id="FechaFin" value="<?php echo $time2; ?>" size="32" readonly></td>
-    <td><input type="submit" id="actualizar" name="btn_actualizar" value="actualizar"/></td>
-    <a href="Reportes.php">
-		 <button type="button" class="btn btn-primary" onClick="" >Generar reportes</button>
-		 </a>		
-    </tr>
-    </form>
-    <?php
-    include("abrir_conexion.php");
-	$FechaFin="";
-	$IdIv="";
-          if(isset($_POST['btn_actualizar']))
-      {
-      $FechaFin    =$_POST['FechaFin'];
-      $IdIv =$_POST['IdIv'];
-	  
- 
-
-  
-       $_UPDATE_SQL="UPDATE $tabla_db1 SET        IdIv='$IdIv',
-	   FechaFin='$FechaFin'
-	    WHERE IdIv = '$IdIv' ";
-		mysqli_query($conexion,$_UPDATE_SQL);
-		echo "Actualizacion Correcta";
-      }
-
-
-    include("cerrar_conexion.php");
-  ?></div>
+      <!--start-banner-->
+   		   <div class="banner agile">
+		      		   <div class="container">
+	            <div class="banner-slider">
+				<div class="callbacks_container">
+					<ul class="rslides" id="slider4">
+					    
+						   <div class="banner-info">
+                           
+				             <p><span>Inventarios Viales</span>
+					               
+					               
+			                 </p>
+					             <p>&nbsp;</p>
+					             <p>&nbsp;</p>
 	
+						   </div>
+						</li>
+						
+
 </body>
 </html>
-
-
-<?php
-mysql_free_result($RecordsetIv);
-?>

@@ -1,0 +1,18 @@
+RURAL MUROS 
+* Material Muro muestra el numero no el nombre de ese id
+RURAL PEAJE 
+* presenta el mismo error muestra id pero no nombre
+RURAL PESAJE 
+* Es el mismo error 
+RURAL PONTON 
+* Es el mismo error
+RURAL PUENTE 
+* Es el mismo error
+RURAL PUNTOS CRITICOS 
+* Es el mismo error
+URBANA ANDEN
+* Consultas de costado, estado,tipo cobertura
+URBANA CALZADA 
+* Consultas de carriles
+URBANA SEPARADOR
+* Consulta estado 
