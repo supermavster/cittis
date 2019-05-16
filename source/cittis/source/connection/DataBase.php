@@ -47,7 +47,10 @@ class DataBase
         $data = array();
         $result = null;
         if ($type != "escape_string" && $type != "real_escape_string") {
-            $result = mysqli_query(self::getDB(), trim($query)) or exit('Error al  ejecutar la consulta:' . "<br/>" . PHP_EOL . ($query) . "<br/>" . PHP_EOL . "<br/>" . PHP_EOL . "En:" . getPath() . '<b>' . basename(__FILE__) . '</b>');
+            $dataTemp["error"] = true;
+            $dataTemp["response"] = $query;
+
+            $result = mysqli_query(self::getDB(), trim($query)) or exit(showElements($dataTemp));
         }
 
         switch ($type) {

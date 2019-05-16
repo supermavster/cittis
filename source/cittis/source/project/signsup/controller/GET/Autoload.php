@@ -40,7 +40,10 @@ class Autoload
                 $content = self::uploadSignal();
                 break;
         }
-        showElements($content);
+
+        $response['error'] = !(isset($content) && !empty($content));
+        $response['response'] = $content;
+        showElements($response);
     }
 
     protected function getDepartments()
@@ -94,6 +97,7 @@ class Autoload
                 break;
             case 'list':
             case 'lista':
+
                 $sql = QueriesDAO::getMaxIDList();
                 break;
             case 'signal':
@@ -101,9 +105,11 @@ class Autoload
                 $sql = QueriesDAO::getMaxIDSignal();
                 break;
         }
-        $tempValue = self::getGeneralConnection()->db_exec('fetch_row', $sql)[0];
-        if (!isset($tempValue) || empty($tempValue)) {
+        $query = self::getGeneralConnection()->db_exec('fetch_row', $sql);
+        if ((!isset($query) || empty($query)) || ($query == null)) {
             $tempValue = 1;
+        } else {
+            $tempValue = $query[0];
         }
         //response array
         return $tempValue;

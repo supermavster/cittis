@@ -24,7 +24,7 @@ class Autoload
                 break;
             default:
                 $this->response['error'] = true;
-                $this->response['message'] = 'No existe operacion para este proceso';
+                $this->response['response'] = 'No existe operacion para este proceso';
         }
         showElements($this->response);
     }
@@ -37,7 +37,7 @@ class Autoload
                 break;
             default:
                 $this->response['error'] = true;
-                $this->response['message'] = 'No existe operacion para este proceso';
+                $this->response['response'] = 'No existe operacion para este proceso';
         }
     }
 
@@ -47,10 +47,10 @@ class Autoload
         $db = new DbOperation(self::getConnection(), self::getGeneralConnection());
         if ($db->createSignals(getRequest("signal"))) {
             $this->response['error'] = false;
-            $this->response['message'] = 'Señal añadida';
+            $this->response['response'] = 'Señal añadida';
         } else {
             $this->response['error'] = true;
-            $this->response['message'] = 'No se puede añadir la señal';
+            $this->response['response'] = 'No se puede añadir la señal';
         }
     }
 

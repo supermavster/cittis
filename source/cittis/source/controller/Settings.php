@@ -162,7 +162,7 @@ class Settings
 }
 
 ## Complement ##
-function getPath($location = 2)
+function getPath($location = 1)
 {
     $n = "";
     $pathFileTemp = "";

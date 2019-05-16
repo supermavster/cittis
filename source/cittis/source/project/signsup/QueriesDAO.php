@@ -4,103 +4,472 @@
 class QueriesDAO
 {
 
-    // Check ID
-    final public static function checkID($table, $idFromtheTable, $id)
+    /** TODO:INSERT ELEMENTS **/
+
+    // -----------------------------------------------------------------------------------------------
+    // --                                      General Data
+    // -----------------------------------------------------------------------------------------------
+
+
+    /** INSERT Data Firebase Table
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataFirebase($values, $idArray)
     {
-        $withID = "";
-        if (isset($id) && !empty($id)) $withID = "WHERE `" . $idFromtheTable . "` LIKE '%" . $id . "%'";
-        $sql = "Select * FROM `" . $table . "` " . $withID;
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_generaldata`.`firebase` (`idFirebase`, `idEmail`, `temp`, `isUser`) VALUES (";// 'LJCpaE6xqmTOmtsKXJp6hnnya2d2', 'mtorres@cittus.com', '0', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
         return $sql;
     }
 
-    // Add Image
-    final public static function addImageValues($table, $id, $values)
+
+    /** Insert User
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataUser($values, $idArray)
     {
-        $sql = "INSERT INTO `$table` (`$id`) VALUES ";//", `Ruta`) VALUES ";
-        $sql .= self::addValues($values);
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_generaldata`.`users` (`username`, `firstName`, `lastName`, `status`, `idFirebase`) VALUES (";//'Mavster', 'Miguel', 'Torres', '1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
         return $sql;
     }
 
-    // Add Values
-    private function addValues($values, $three = false)
+    /** Insert Rule
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataRule($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_generaldata`.`rules` (`idRule`, `enable`, `idMunicipality`) VALUES (";//'1', '1', '15238');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Project
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataProject($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_generaldata`.`projects` (`idProject`, `nameProject`, `idRule`) VALUES (";//'1', 'INVIAS-01', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Project - Rule
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataProjectRule($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_generaldata`.`rules_projects` (`idRules`, `IdProject`) VALUES (";//'1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Project - User
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataProjectUser($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_generaldata`.`users_projects` (`idUser`, `idProject`) VALUES (";//'1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    // -----------------------------------------------------------------------------------------------
+    // --                                      Signal
+    // -----------------------------------------------------------------------------------------------
+
+    /** Insert Coordinates
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataCoordinates($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`coordinates` (`altitude`, `longitude`, `latitude`) VALUES (";//'1', '2', '3');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert States
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataStates($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`state` (`nameState`) VALUES (";//'BUENO'); (MALO & REGULAR)
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Name List Signs
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataNameListSigns($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`namelistsigns` (`idInformativeSigns`) VALUES (";//'SI-01');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Signal Main
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataSignalMain($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`signalmain` (`typeSignal`, `idCoordinates`, `idNameSignal`, `stateSignal`) VALUES (";//'VERTICAL', '1', '1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert List Project - Signal
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataListSignal($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`listsignal` (`idSignal`, `idProject`) VALUES (";//'1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    // -----------------------------------------------------------------------------------------------
+    // --                              Signal  -   Vertical
+    // -----------------------------------------------------------------------------------------------
+
+    /** Insert Side
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataSide($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`side` (`nameSide`) VALUES (";//'test-side');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Type Post
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataTypePost($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`typepost` (`nameTypePost`) VALUES (";//'test-typepost');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Size Signal
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataSizeSignal($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`sizesignal` (`nameSize`) VALUES (";//'test-sizesignal');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Signal Vertical
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataSignalVertical($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`signalvertical` (`idSignal`, `idSide`, `idTypePost`, `idSizeSignal`, `statePost`) VALUES (";//'1', '1', '1', '1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    // -----------------------------------------------------------------------------------------------
+    // --                              Signal  -   Horizontal
+    // -----------------------------------------------------------------------------------------------
+
+    /** Insert Location
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataLocation($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`location` (`nameLocation`) VALUES (";//'test-location');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Rail
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataRail($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`rail` (`nameRail`) VALUES (";//'test-rail');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+    /** Insert Signal Horizontal
+     * @param $values
+     * @param $idArray
+     * @return string
+     */
+    final public static function addDataSignalHorizontal($values, $idArray)
+    {
+        // SQL Main
+        $sql = "INSERT INTO `cittisco_signsup`.`signalhorizontal` (`idSignal`, `idLocation`, `idRail`) VALUES (";//'1', '1', '1');
+        // Get Data
+        $sql .= self::getValues($values, $idArray);
+        // Return SQL (Made)
+        return $sql;
+    }
+
+
+
+    /** TODO:GET ELEMENTS **/
+
+    /**
+     * Count Invetory - List
+     * @param $idSignal
+     * @param $idProject
+     * @return string
+     */
+    final static function getCountInventoryById($idSignal, $idProject)
+    {
+        return "SELECT COUNT(`listSignal`.*) FROM `cittisco_signsup`.`ListSignal` listSignal WHERE `listSignal`.idSignal = $idSignal AND `listSignal`.idProject = $idProject;";
+    }
+
+    /** Max ID (+1) - Signal **/
+    final static function getMaxSignal()
+    {
+        return "SELECT (MAX(idSignal)+1) maxID FROM signalmain;";
+    }
+
+    /** Get Rules By User (municipio,departamento)
+     * @param $idUserFirebase
+     * @return string
+     */
+    final static function getRulesMunicipalitiesDepartmentsByUser($idUserFirebase)
+    {
+        return "SELECT `municipalities`.nameMunicipality AS municipio, `department`.nameDepartment AS departamento
+                FROM 
+                `cittisco_generaldata`.`firebase` firebase
+                INNER JOIN 
+                `cittisco_generaldata`.`users` users
+                ON `firebase`.id = `users`.idFirebase
+                INNER JOIN
+                `cittisco_generaldata`.`projects` projects 
+                ON 
+                `users`.idUser = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`users_projects` users_projects
+                ON
+                `users_projects`.idProject = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`rules_projects` rules_projects
+                ON 
+                `rules_projects`.idProject = `projects`.idProject
+                 INNER JOIN
+                `cittisco_generaldata`.`rules`
+                ON
+                `rules_projects`.idRules = `rules`.idRule
+                INNER JOIN
+                `cittisco_generaldata`.`municipalities` municipalities
+                ON
+                `rules`.idMunicipality =  `municipalities`.idMunicipality
+                INNER JOIN
+                `cittisco_generaldata`.`department` department
+                ON
+                `department`.idDepartment =  `municipalities`.idDepartment
+                WHERE
+                `users`.idUser = `users_projects`.idUser
+                AND
+                `firebase`.idFirebase = '$idUserFirebase' 
+                ;";
+    }
+
+    /** Only Departamentos
+     * @param $idUserFirebase
+     * @return string
+     */
+    final static function getRulesDepartmentsByUser($idUserFirebase)
+    {
+        return "SELECT `department`.nameDepartment AS departamento
+                FROM 
+                `cittisco_generaldata`.`firebase` firebase
+                INNER JOIN 
+                `cittisco_generaldata`.`users` users
+                ON `firebase`.id = `users`.idFirebase
+                INNER JOIN
+                `cittisco_generaldata`.`projects` projects 
+                ON 
+                `users`.idUser = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`users_projects` users_projects
+                ON
+                `users_projects`.idProject = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`rules_projects` rules_projects
+                ON 
+                `rules_projects`.idProject = `projects`.idProject
+                 INNER JOIN
+                `cittisco_generaldata`.`rules`
+                ON
+                `rules_projects`.idRules = `rules`.idRule
+                INNER JOIN
+                `cittisco_generaldata`.`municipalities` municipalities
+                ON
+                `rules`.idMunicipality =  `municipalities`.idMunicipality
+                INNER JOIN
+                `cittisco_generaldata`.`department` department
+                ON
+                `department`.idDepartment =  `municipalities`.idDepartment
+                WHERE
+                `users`.idUser = `users_projects`.idUser
+                AND
+                `firebase`.idFirebase = '$idUserFirebase' 
+                GROUP BY departamento
+                ;";
+    }
+
+    /** Only Municipios
+     * @param $idUserFirebase
+     * @return string
+     */
+    final static function getRulesMunicipalitiesByUser($idUserFirebase)
+    {
+        return "SELECT `municipalities`.nameMunicipality AS municipio
+                FROM 
+                `cittisco_generaldata`.`firebase` firebase
+                INNER JOIN 
+                `cittisco_generaldata`.`users` users
+                ON `firebase`.id = `users`.idFirebase
+                INNER JOIN
+                `cittisco_generaldata`.`projects` projects 
+                ON 
+                `users`.idUser = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`users_projects` users_projects
+                ON
+                `users_projects`.idProject = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`rules_projects` rules_projects
+                ON 
+                `rules_projects`.idProject = `projects`.idProject
+                 INNER JOIN
+                `cittisco_generaldata`.`rules`
+                ON
+                `rules_projects`.idRules = `rules`.idRule
+                INNER JOIN
+                `cittisco_generaldata`.`municipalities` municipalities
+                ON
+                `rules`.idMunicipality =  `municipalities`.idMunicipality
+                INNER JOIN
+                `cittisco_generaldata`.`department` department
+                ON
+                `department`.idDepartment =  `municipalities`.idDepartment
+                WHERE
+                `users`.idUser = `users_projects`.idUser
+                AND
+                `firebase`.idFirebase = '$idUserFirebase' 
+                GROUP BY municipio
+                ;";
+    }
+
+    /** Process *
+     * @param $values
+     * @param $idArray
+     * @param int $short
+     * @return string
+     */
+    protected function getValues($values, $idArray, $short = 0)
     {
         $sql = "";
-        if (is_array($values)) {
-            $i = 0;
-            foreach ($values as $key => $value) {
-                $sql .= "('" . $value['id'] . "'";//, '".$value['ruta']."'";
-                /*if($three){
-                    $sql .= ",'".$value['ruta']."'";
-                }*/
-                $sql .= ")";
-                if ($i++ != count($values) - 1) {
-                    $sql .= ",";
-                } else {
-                    $sql .= ";";
-                }
+        $values = $values[$idArray];
+        $tempValue = 0;
+        foreach ($values as $valor) {
+            $sql .= "'$valor'";
+            if ($tempValue++ == (count($values) - $short)) {
+                $sql .= ");";
+                break;
+            } else {
+                $sql .= ",";
             }
         }
         return $sql;
     }
 
-    /** Get Max ID **/
-    // Inventory
-    final public static function getMaxIDInventory()
-    {
-        return "SELECT (MAX(idSignal)+1) IDMax FROM listsignal";
-    }
 
-    final public static function getMaxIdSignalMoreOne()
-    {
-        return "SELECT (MAX(IdSignal)+1) FROM signalmain";
-    }
-
-    final public static function getIdMunicipio($name)
-    {
-        return "SELECT idMunicipality FROM municipalities WHERE nameMunicipality LIKE '%$name%'";
-    }
-
-    final public static function addInventario($idInventario, $idMunicipio)
-    {
-        return "REPLACE INTO `inventario` (`IdInS`,`IdMuni`) VALUES ('$idInventario','$idMunicipio');";
-    }
-
-    final public static function addSiganl($IdS, $TipS, $Lado, $Ubicacion, $Carril, $Latitud, $Longitud, $TipoP, $Tamaño, $Senal, $EstadoPost, $EstadoSe)
-    {
-        return "INSERT INTO señal (IdS,TipS,Lado,Ubicacion,Carril,Latitud,Longitud,TipoP,Tamaño,Señal,EstadoPost,EstadoSe)
-        VALUES ('$IdS','$TipS','$Lado','$Ubicacion','$Carril','$Latitud','$Longitud','$TipoP','$Tamaño','$Senal','$EstadoPost','$EstadoSe');";
-    }
-
-    final public static function getIdTypeSignal($name)
-    {
-        return "SELECT IdTS FROM tiposeñal WHERE NomTS LIKE '%$name%'";
-    }
-
-    final public static function getIdLado($name)
-    {
-        return "SELECT IdLad FROM lado WHERE NomLad LIKE '%$name%'";
-    }
-
-    final public static function getIdLocation($name)
-    {
-        return "SELECT IdUbi FROM ubicacion WHERE NomUbi LIKE '%$name%'";
-    }
-
-
-    final public static function getIdTipoFijacion($name)
-    {
-        return "SELECT IdP FROM poste WHERE NomP LIKE '%$name%'";
-    }
-
-    final public static function getIdSize($name)
-    {
-        return "SELECT IdTa FROM `tamañosv` WHERE NombTa LIKE '%$name%'";
-    }
-
-    final public static function addListSignal($IdIn, $IdSen)
-    {
-        return "INSERT INTO listasen (IdIn,IdSen) VALUES ('$IdIn','$IdSen');";
-    }
 }
 
 new QueriesDAO();

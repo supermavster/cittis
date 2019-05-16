@@ -20,11 +20,11 @@ class Autoload
         switch (true) {
             case getRequest("test"):
                 $this->response['error'] = false;
-                $this->response['message'] = 'ok';
+                $this->response['response'] = 'ok';
                 break;
             default:
                 $this->response['error'] = true;
-                $this->response['message'] = 'No existe operacion para este proceso';
+                $this->response['response'] = 'No existe operacion para este proceso';
         }
         showElements($this->response);
     }
