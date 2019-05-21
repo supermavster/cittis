@@ -3,8 +3,11 @@
 
 class MainQueriesDAO
 {
-    // Get Departments
-    final public static function getDepartments($name)
+    /** Get Departments
+     * @param $name
+     * @return string
+     */
+    final static function getDepartments($name)
     {
         $sql = "";
         if (isset($name) && !empty($name) && $name != 'all') {
@@ -13,8 +16,11 @@ class MainQueriesDAO
         return "SELECT `nameDepartment` FROM `department` $sql";
     }
 
-    // Get Departments
-    final public static function getMunicipalityByDepartment($nameDepartment)
+    /** Get Departments
+     * @param $nameDepartment
+     * @return string
+     */
+    final static function getMunicipalityByDepartment($nameDepartment)
     {
         $sql = "";
         if (isset($nameDepartment) && !empty($nameDepartment) && $nameDepartment != 'all') {
@@ -24,16 +30,20 @@ class MainQueriesDAO
         return $sql;
     }
 
-    // Get ID Table
-    final public static function getIDTable($table)
+    /** Get ID Table
+     * @param $table
+     * @return string
+     */
+    final static function getIDTable($table)
     {
-        return "SELECT COLUMN_NAME  
-        FROM INFORMATION_SCHEMA.COLUMNS 
-        WHERE COLUMN_NAME LIKE '%Id%' AND TABLE_NAME LIKE '%$table%' LIMIT 1";
+        return "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME LIKE '%Id%' AND TABLE_NAME LIKE '%$table%' LIMIT 1";
     }
 
-    // Truncate Table
-    final public static function truncateTable($table)
+    /** Truncate Table
+     * @param $table
+     * @return string
+     */
+    final static function truncateTable($table)
     {
         return "TRUNCATE `$table`;";
     }

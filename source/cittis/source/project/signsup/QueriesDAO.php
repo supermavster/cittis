@@ -294,25 +294,23 @@ class QueriesDAO
         return $sql;
     }
 
-
-
     /** TODO:GET ELEMENTS **/
 
     /**
-     * Count Invetory - List
+     * Count Inventory - List
      * @param $idSignal
      * @param $idProject
      * @return string
      */
     final static function getCountInventoryById($idSignal, $idProject)
     {
-        return "SELECT COUNT(`listSignal`.*) FROM `cittisco_signsup`.`ListSignal` listSignal WHERE `listSignal`.idSignal = $idSignal AND `listSignal`.idProject = $idProject;";
+        return "SELECT COUNT(*) as countInventory FROM `cittisco_signsup`.`listsignal` listSignal WHERE `listSignal`.idSignal = '$idSignal' AND `listSignal`.idProject = '$idProject';";
     }
 
     /** Max ID (+1) - Signal **/
-    final static function getMaxSignal()
+    final static function getMaxIDSignal()
     {
-        return "SELECT (MAX(idSignal)+1) maxID FROM signalmain;";
+        return "SELECT (MAX(signalmain.idSignal)+1) AS maxID FROM `cittisco_signsup`.`signalmain` signalmain;";
     }
 
     /** Get Rules By User (municipio,departamento)
@@ -321,7 +319,7 @@ class QueriesDAO
      */
     final static function getRulesMunicipalitiesDepartmentsByUser($idUserFirebase)
     {
-        return "SELECT `municipalities`.nameMunicipality AS municipio, `department`.nameDepartment AS departamento
+        return "SELECT `municipalities`.nameMunicipality AS nameMunicipality, `department`.nameDepartment AS nameDepartment
                 FROM 
                 `cittisco_generaldata`.`firebase` firebase
                 INNER JOIN 
@@ -364,7 +362,7 @@ class QueriesDAO
      */
     final static function getRulesDepartmentsByUser($idUserFirebase)
     {
-        return "SELECT `department`.nameDepartment AS departamento
+        return "SELECT `department`.nameDepartment AS nameDepartment
                 FROM 
                 `cittisco_generaldata`.`firebase` firebase
                 INNER JOIN 
@@ -398,9 +396,64 @@ class QueriesDAO
                 `users`.idUser = `users_projects`.idUser
                 AND
                 `firebase`.idFirebase = '$idUserFirebase' 
-                GROUP BY departamento
+                GROUP BY nameDepartment
                 ;";
     }
+
+    /** Only Name Department
+     * @param $idUserFirebase
+     * @param string $name
+     * @return string
+     */
+    final static function getRulesNameDepartmentsByUser($idUserFirebase, $name = "")
+    {
+        $sql = "";
+        if (isset($name) && !empty($name) && $name != 'all') {
+            $sql = "AND `department`.nameDepartment LIKE '%$name%'";
+        }
+
+        // Query Normal
+        return "SELECT `department`.nameDepartment AS nameDepartment
+                FROM 
+                `cittisco_generaldata`.`firebase` firebase
+                INNER JOIN 
+                `cittisco_generaldata`.`users` users
+                ON `firebase`.id = `users`.idFirebase
+                INNER JOIN
+                `cittisco_generaldata`.`projects` projects 
+                ON 
+                `users`.idUser = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`users_projects` users_projects
+                ON
+                `users_projects`.idProject = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`rules_projects` rules_projects
+                ON 
+                `rules_projects`.idProject = `projects`.idProject
+                 INNER JOIN
+                `cittisco_generaldata`.`rules`
+                ON
+                `rules_projects`.idRules = `rules`.idRule
+                INNER JOIN
+                `cittisco_generaldata`.`municipalities` municipalities
+                ON
+                `rules`.idMunicipality =  `municipalities`.idMunicipality
+                INNER JOIN
+                `cittisco_generaldata`.`department` department
+                ON
+                `department`.idDepartment =  `municipalities`.idDepartment
+                WHERE
+                `users`.idUser = `users_projects`.idUser
+                AND
+                `firebase`.idFirebase = '$idUserFirebase' 
+                $sql
+                GROUP BY nameDepartment
+                ;";
+    }
+
+
+
 
     /** Only Municipios
      * @param $idUserFirebase
@@ -408,7 +461,7 @@ class QueriesDAO
      */
     final static function getRulesMunicipalitiesByUser($idUserFirebase)
     {
-        return "SELECT `municipalities`.nameMunicipality AS municipio
+        return "SELECT `municipalities`.nameMunicipality AS nameMunicipality
                 FROM 
                 `cittisco_generaldata`.`firebase` firebase
                 INNER JOIN 
@@ -442,7 +495,56 @@ class QueriesDAO
                 `users`.idUser = `users_projects`.idUser
                 AND
                 `firebase`.idFirebase = '$idUserFirebase' 
-                GROUP BY municipio
+                GROUP BY nameMunicipality
+                ;";
+    }
+
+    /** Only Municipios - By ID Firebase
+     * @param $idUserFirebase
+     * @return string
+     */
+    final static function getRulesNameMunicipalitiesByUser($idUserFirebase, $name = "")
+    {
+        $sql = "";
+        if (isset($name) && !empty($name) && $name != 'all') {
+            $sql = "AND `department`.nameDepartment LIKE '%$name%'";
+        }
+        return "SELECT `municipalities`.nameMunicipality AS nameMunicipality
+                FROM 
+                `cittisco_generaldata`.`firebase` firebase
+                INNER JOIN 
+                `cittisco_generaldata`.`users` users
+                ON `firebase`.id = `users`.idFirebase
+                INNER JOIN
+                `cittisco_generaldata`.`projects` projects 
+                ON 
+                `users`.idUser = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`users_projects` users_projects
+                ON
+                `users_projects`.idProject = `projects`.idProject
+                INNER JOIN
+                `cittisco_generaldata`.`rules_projects` rules_projects
+                ON 
+                `rules_projects`.idProject = `projects`.idProject
+                 INNER JOIN
+                `cittisco_generaldata`.`rules`
+                ON
+                `rules_projects`.idRules = `rules`.idRule
+                INNER JOIN
+                `cittisco_generaldata`.`municipalities` municipalities
+                ON
+                `rules`.idMunicipality =  `municipalities`.idMunicipality
+                INNER JOIN
+                `cittisco_generaldata`.`department` department
+                ON
+                `department`.idDepartment =  `municipalities`.idDepartment
+                WHERE
+                `users`.idUser = `users_projects`.idUser
+                AND
+                `firebase`.idFirebase = '$idUserFirebase' 
+                $sql
+                GROUP BY nameMunicipality
                 ;";
     }
 
