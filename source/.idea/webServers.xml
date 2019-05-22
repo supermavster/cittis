@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="21ea92b5-d6be-42fa-ad24-7832add8fd26" name="Cittis.com.co" url="http://ftp.cittis.com.co">
+        <fileTransfer host="ftp.cittis.com.co" port="1022" rootFolder="/home/cittisco/public_html" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="1022" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

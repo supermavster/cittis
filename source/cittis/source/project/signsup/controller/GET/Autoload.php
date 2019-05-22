@@ -49,8 +49,14 @@ class Autoload
 
 
         $response = array();
-        $response['error'] = !(isset($content) && !empty($content));
-        $response['response'] = $content;
+        $dataState = (isset($content) && !empty($content));
+        if (!$dataState) {
+            $response['error'] = (!$dataState);
+        }
+        $response['success'] = (int)$dataState;
+        $values['data'] = $content;
+        $response['response'] = JsonHandler::decode(JsonHandler::encode($values, JSON_PRETTY_PRINT), true);
+
         showElements($response);
     }
 

@@ -12,5 +12,5 @@
 // Add Library of Control
 require_once '../../cittis/source/controller/Control.php';
 // Make the index
-$ctrl->makeActionRequest();
+$ctrl->makeActionRequest(); //* /
 ?>

@@ -79,7 +79,7 @@ class Settings
         //Data Base
         require_once AS_DB . 'DataBase.php';
         $this->connection = new DataBase();
-        $this->generalConnection = new DataBase('cittisco_generalData');
+        $this->generalConnection = new DataBase('cittisco_generaldata');
         if ($this->generalConnection !== null && $this->connection != null) {
             define("CH_DB", ($this->connection->getDB()) ? "Yes" : "No");
             define("CH_DB_U", ($this->generalConnection->getDB()) ? "Yes" : "No");

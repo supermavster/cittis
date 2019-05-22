@@ -47,6 +47,7 @@ class DataBase
         $data = array();
         $result = null;
         if ($type != "escape_string" && $type != "real_escape_string") {
+            
             $dataTemp["error"] = true;
             $dataTemp["response"] = $query;
 
