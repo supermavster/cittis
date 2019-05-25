@@ -33,19 +33,10 @@ class MakeActions
     protected function initProcess()
     {
         require_once AS_PROJECTS . '/MainQueriesDAO.php';
-
-        switch (checkRequest(true)) {
-            case "GET":
-                require_once AS_CONTROL . 'generalData/GetActions.php';
-                break;
-            case "GETPOST":
-            case "POSTGET":
-            case "POST":
+        if ($_SERVER['REQUEST_METHOD'] === "GET") {
+            require_once AS_CONTROL . 'generalData/GetActions.php';
+        } else {
                 require_once AS_CONTROL . 'generalData/PostActions.php';
-                break;
-            default:
-                echo checkRequest(true);
-                break;
         }
     }
 

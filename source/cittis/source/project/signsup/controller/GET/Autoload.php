@@ -19,6 +19,9 @@ class Autoload
     {
         $content = "";
         switch (true) {
+            case getRequest('checkUser'):
+                $content = self::getCheckUser();
+                break;
             // Get Data Basic
             case getRequest("departments"):
             case getRequest("departamentos"):
@@ -47,9 +50,8 @@ class Autoload
                 break;
         }
 
-
         $response = array();
-        $dataState = (isset($content) && !empty($content));
+        $dataState = (isset($content) || empty($content));
         if (!$dataState) {
             $response['error'] = (!$dataState);
         }
@@ -58,6 +60,17 @@ class Autoload
         $response['response'] = JsonHandler::decode(JsonHandler::encode($values, JSON_PRETTY_PRINT), true);
 
         showElements($response);
+    }
+
+    protected function getCheckUser()
+    {
+        if ((getRequest("idUserFirebase"))) {
+            // Values TEMP
+            $idUserFirebase = getRequest("idUserFirebase");
+            $sql = QueriesDAO::checkUserFirebase($idUserFirebase);
+            $value = self::getGeneralConnection()->db_exec('value', $sql);
+            return $value;
+        }
     }
 
     protected function getDepartments()
@@ -120,11 +133,10 @@ class Autoload
 
     protected function getCount()
     {
-        if ((getRequest("idSignal")) && (getRequest("idProject"))) {
+        if ((getRequest("idUserFirebase"))) {
 
             // Values TEMP
-            $idSignal = getRequest("idSignal");
-            $idProject = getRequest("idProject");
+            $idUserFirebase = getRequest("idUserFirebase");
 
             $sql = "";
             switch (getRequest("count")) {
@@ -132,7 +144,7 @@ class Autoload
                 case 'Inventario':
                 case 'inventario':
                 case 'inventory':
-                    $sql = QueriesDAO::getCountInventoryById($idSignal, $idProject);
+                    $sql = QueriesDAO::getCountInventoryById($idUserFirebase);
                     break;
             }
 
@@ -153,21 +165,28 @@ class Autoload
     protected function getMaxID()
     {
         $sql = "";
-        switch (getRequest("maxID")) {
-            case 'signal':
-            case 'señal':
-                $sql = QueriesDAO::getMaxIDSignal();
-                break;
-        }
-        // Check Element
-        $query = self::getGeneralConnection()->db_exec('fetch_row', $sql);
-        if ((!isset($query) || empty($query)) || ($query == null)) {
-            $tempValue = 1;
+        if ((getRequest("idUserFirebase"))) {
+
+            // Values TEMP
+            $idUserFirebase = getRequest("idUserFirebase");
+            switch (getRequest("maxID")) {
+                case 'signal':
+                case 'señal':
+                    $sql = QueriesDAO::getMaxIDSignal($idUserFirebase);
+                    break;
+            }
+            // Check Element
+            $query = self::getGeneralConnection()->db_exec('fetch_row', $sql);
+            if ((!isset($query) || empty($query)) || ($query == null)) {
+                $tempValue = 1;
+            } else {
+                $tempValue = (int)$query[0];
+            }
+            //response array
+            return $tempValue;
         } else {
-            $tempValue = (int)$query[0];
+            return null;
         }
-        //response array
-        return $tempValue;
     }
 
     protected function getSignal()

@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="21ea92b5-d6be-42fa-ad24-7832add8fd26" name="Cittis.com.co" url="http://ftp.cittis.com.co">
-        <fileTransfer host="ftp.cittis.com.co" port="1022" rootFolder="/home/cittisco/public_html" accessType="SFTP">
+        <fileTransfer host="ftp.cittis.com.co" port="1022" rootFolder="/home/cittisco/signsup.cittis.com.co" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

@@ -4,6 +4,16 @@
 class QueriesDAO
 {
 
+
+    /** Firebase
+     * @param $idUserFirebase
+     * @return string
+     */
+    final static function checkUserFirebase($idUserFirebase)
+    {
+        return "SELECT COUNT(firebase.`idFirebase`) COUNT FROM `cittisco_generaldata`.`firebase` firebase WHERE firebase.`idFirebase` = '$idUserFirebase'";
+    }
+
     /** TODO:INSERT ELEMENTS **/
 
     // -----------------------------------------------------------------------------------------------
@@ -298,19 +308,62 @@ class QueriesDAO
 
     /**
      * Count Inventory - List
-     * @param $idSignal
-     * @param $idProject
+     * @param $idUserFirebase
      * @return string
      */
-    final static function getCountInventoryById($idSignal, $idProject)
+    final static function getCountInventoryById($idUserFirebase)
     {
-        return "SELECT COUNT(*) as countInventory FROM `cittisco_signsup`.`listsignal` listSignal WHERE `listSignal`.idSignal = '$idSignal' AND `listSignal`.idProject = '$idProject';";
+        return "SELECT COUNT(`listSignal`.idSignal) as countInventory 
+FROM 
+`cittisco_generaldata`.`firebase` firebase
+INNER JOIN 
+`cittisco_generaldata`.`users` users
+ON `firebase`.id = `users`.idFirebase
+INNER JOIN
+`cittisco_generaldata`.`projects` projects 
+ON 
+`users`.idUser = `projects`.idProject
+INNER JOIN
+`cittisco_generaldata`.`users_projects` users_projects
+ON
+`users_projects`.idProject = `projects`.idProject
+INNER JOIN
+`cittisco_signsup`.`listsignal` listSignal 
+ON 
+`listSignal`.idProject = `projects`.idProject
+WHERE 
+`firebase`.idFirebase = '$idUserFirebase' 
+ ";
     }
 
-    /** Max ID (+1) - Signal **/
-    final static function getMaxIDSignal()
+    /** Max ID (+1) - Signal *
+     * @param $idUserFirebase
+     * @return string
+     */
+    final static function getMaxIDSignal($idUserFirebase)
     {
-        return "SELECT (MAX(signalmain.idSignal)+1) AS maxID FROM `cittisco_signsup`.`signalmain` signalmain;";
+        return "
+SELECT (MAX(`listSignal`.idSignal)+1) AS maxID 
+FROM 
+`cittisco_generaldata`.`firebase` firebase
+INNER JOIN 
+`cittisco_generaldata`.`users` users
+ON `firebase`.id = `users`.idFirebase
+INNER JOIN
+`cittisco_generaldata`.`projects` projects 
+ON 
+`users`.idUser = `projects`.idProject
+INNER JOIN
+`cittisco_generaldata`.`users_projects` users_projects
+ON
+`users_projects`.idProject = `projects`.idProject
+INNER JOIN
+`cittisco_signsup`.`listsignal` listSignal 
+ON 
+`listSignal`.idProject = `projects`.idProject
+WHERE 
+`firebase`.idFirebase = '$idUserFirebase' 
+ ";
     }
 
     /** Get Rules By User (municipio,departamento)
@@ -547,6 +600,7 @@ class QueriesDAO
                 GROUP BY nameMunicipality
                 ;";
     }
+
 
     /** Process *
      * @param $values

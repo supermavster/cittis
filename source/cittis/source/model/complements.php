@@ -94,20 +94,13 @@ function removeCookie($key)
 function checkRequest($string = false)
 {
     if (!$string) {
-        if (!empty ($_GET) or !empty ($_POST)) {
+        if (!empty ($_POST) or !empty ($_GET)) {
             return true;
         } else {
             return false;
         }
     } else {
-        $value = "";
-        if (!empty ($_GET)) {
-            $value .= "GET";
-        }
-        if (!empty ($_POST)) {
-            $value .= "POST";
-        }
-        return $value;
+        return ($_SERVER['REQUEST_METHOD']);
     }
 
 }

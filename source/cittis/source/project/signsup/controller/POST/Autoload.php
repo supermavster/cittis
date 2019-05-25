@@ -17,27 +17,36 @@ class Autoload
 
     protected function initProcess()
     {
-        $content = "";
+        $json = array();
         switch (true) {
             case getRequest("add"):
-                $content = self::addElements();
+                $json = self::addElements();
                 break;
             default:
-                $this->response['error'] = true;
-                $this->response['response'] = 'No existe operacion para este proceso';
+
+                $data = array();
+                $json['success'] = (int)false;
+                $data['data'] = 'No se puede añadir la señal';
+                $json["response"] = $data;
+                break;
         }
-        showElements($this->response);
+
+        $dataState = (isset($json) || empty($json));
+        if (!$dataState) {
+            $json['error'] = (!$dataState);
+        }
+        showElements($json);
     }
 
     protected function addElements()
     {
         switch (getRequest("add")) {
             case 'signal':
-                self::initProcessSignal();
+                // $content = self::initProcessSignal();
                 break;
-            default:
-                $this->response['error'] = true;
-                $this->response['response'] = 'No existe operacion para este proceso';
+            case 'firebase':
+                return self::addFirebaseUser();
+                break;
         }
     }
 
@@ -52,6 +61,37 @@ class Autoload
             $this->response['error'] = true;
             $this->response['response'] = 'No se puede añadir la señal';
         }
+    }
+
+    protected function addFirebaseUser()
+    {
+        $json = array();
+        $json['success'] = (int)true;
+        $data['data'] = 'Complete';
+        $json["response"] = $data;
+        // Process Init
+        $values = self::getValuesPost();
+        if (isset($values) && !empty($values)) {
+
+            $sql = QueriesDAO::addDataFirebase($values);
+            return $json;
+        } else {
+            return null;
+        }
+
+
+    }
+
+    protected function getValuesPost($key = "data", $keyTwo = "data")
+    {
+        $values = $_POST[$key];
+        $decodeJSON = JsonHandler::decode($values, true);
+
+        // Convert JSON string to Array
+        $values = "{" . $decodeJSON[$keyTwo] . "}";
+        $someArray = JsonHandler::decode($values, true);
+        // Dump all data of the Array
+        return ($someArray);
     }
 
     protected function getConnection()
