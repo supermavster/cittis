@@ -28,8 +28,9 @@ class QueriesDAO
      */
     final public static function addDataFirebase($values, $idArray)
     {
-        // SQL Main
-        $sql = "INSERT INTO `cittisco_generaldata`.`firebase` (`idFirebase`, `idEmail`, `temp`, `isUser`) VALUES (";// 'LJCpaE6xqmTOmtsKXJp6hnnya2d2', 'mtorres@cittus.com', '0', '1');
+        // SQL Main INSERT INTO `cittisco_generaldata`.`firebase` (`id`,`idFirebase`, `email`, `temp`, `isUser`) VALUES (SELECT MAX( `firebase`.`id` ) + 1,'LJCpaE6xqmTOmtsKXJp6hnnya2d2','mtorres@cittus.com','0','1');
+
+        $sql = "INSERT INTO `cittisco_generaldata`.`firebase` (`idFirebase`, `email`, `temp`, `isUser`) VALUES (";// 'LJCpaE6xqmTOmtsKXJp6hnnya2d2', 'mtorres@cittus.com', '0', '1');
         // Get Data
         $sql .= self::getValues($values, $idArray);
         // Return SQL (Made)
@@ -462,7 +463,7 @@ WHERE
     {
         $sql = "";
         if (isset($name) && !empty($name) && $name != 'all') {
-            $sql = "AND `department`.nameDepartment LIKE '%$name%'";
+            $sql = "AND `department`.nameDepartment LIKE '%$name%' ";
         }
 
         // Query Normal
@@ -608,7 +609,7 @@ WHERE
      * @param int $short
      * @return string
      */
-    protected function getValues($values, $idArray, $short = 0)
+    protected function getValues($values, $idArray, $short = 1)
     {
         $sql = "";
         $values = $values[$idArray];

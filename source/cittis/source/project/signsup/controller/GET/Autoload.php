@@ -17,6 +17,7 @@ class Autoload
 
     protected function initProcess()
     {
+        $values = array();
         $content = "";
         switch (true) {
             case getRequest('checkUser'):
@@ -50,15 +51,14 @@ class Autoload
                 break;
         }
 
-        $response = array();
-        $dataState = (isset($content) || empty($content));
-        if (!$dataState) {
-            $response['error'] = (!$dataState);
-        }
-        $response['success'] = (int)$dataState;
-        $values['data'] = $content;
-        $response['response'] = JsonHandler::decode(JsonHandler::encode($values, JSON_PRETTY_PRINT), true);
 
+        $response = array();
+        $dataState = (int)(isset($content) && !empty($content));
+        $response['success'] = $dataState;
+        if (!$dataState) {
+            $content = array('error' => 'No Actions');
+        }
+        $response['response'] = $content;//JsonHandler::decode(JsonHandler::encode($values, JSON_PRETTY_PRINT), true);
         showElements($response);
     }
 
@@ -69,7 +69,7 @@ class Autoload
             $idUserFirebase = getRequest("idUserFirebase");
             $sql = QueriesDAO::checkUserFirebase($idUserFirebase);
             $value = self::getGeneralConnection()->db_exec('value', $sql);
-            return $value;
+            return array("data" => $value);
         }
     }
 
@@ -87,10 +87,11 @@ class Autoload
                 $name = "all";
                 breaK;
         }
-
         if (getRequest('idFirebase')) {
             $idFirebase = getRequest('idFirebase');
-            $tempElements = self::getGeneralConnection()->db_exec('fetch_array', QueriesDAO::getRulesNameDepartmentsByUser($idFirebase, $name));
+            $sql = QueriesDAO::getRulesNameDepartmentsByUser($idFirebase, $name);
+            $tempElements = self::getGeneralConnection()->db_exec('fetch_array', $sql); 
+
         } else {
             $tempElements = self::getGeneralConnection()->db_exec('fetch_array', MainQueriesDAO::getDepartments($name));
         }
@@ -99,7 +100,7 @@ class Autoload
         foreach ($tempElements as $key => $value) {
             array_push($tempValues, $value['nameDepartment']);
         }
-        return ($tempValues);
+        return array("data" => $tempValues);
     }
 
     protected function getGeneralConnection()
@@ -128,7 +129,7 @@ class Autoload
         foreach ($tempElements as $key => $value) {
             array_push($tempValues, $value['nameMunicipality']);
         }
-        return ($tempValues);
+        return array("data" => $tempValues);
     }
 
     protected function getCount()
@@ -156,7 +157,7 @@ class Autoload
                 $tempValue = (int)$query[0];
             }
             //response array
-            return $tempValue;
+            return array("data" => $tempValue);
         } else {
             return null;
         }

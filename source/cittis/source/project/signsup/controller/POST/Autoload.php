@@ -6,7 +6,6 @@ class Autoload
     protected $generalConnection;
 
     //response array
-    protected $response = array();
 
     public function __construct($connection, $generalConnection)
     {
@@ -17,25 +16,31 @@ class Autoload
 
     protected function initProcess()
     {
-        $json = array();
+
+        $content = array();
+
         switch (true) {
-            case getRequest("add"):
-                $json = self::addElements();
-                break;
-            default:
+            case getRequest("add") && (getRequest("add") == "firebase"):
+                if (self::addFirebaseUsers()) {
 
-                $data = array();
-                $json['success'] = (int)false;
-                $data['data'] = 'No se puede añadir la señal';
-                $json["response"] = $data;
+                    $content =
+                        array(
+                            'Complete' => "Datos Añadidos"
+                        );
+                }
+                //self::addElements();
                 break;
         }
 
-        $dataState = (isset($json) || empty($json));
+        // Show Elements
+        $response = array();
+        $dataState = (int)(isset($content) && !empty($content));
+        $response['success'] = $dataState;
         if (!$dataState) {
-            $json['error'] = (!$dataState);
+            $content = array('error' => 'No Actions');
         }
-        showElements($json);
+        $response['response'] = $content;//JsonHandler::decode(JsonHandler::encode($values, JSON_PRETTY_PRINT), true);
+        showElements($response);
     }
 
     protected function addElements()
@@ -65,16 +70,56 @@ class Autoload
 
     protected function addFirebaseUser()
     {
-        $json = array();
-        $json['success'] = (int)true;
-        $data['data'] = 'Complete';
-        $json["response"] = $data;
-        // Process Init
-        $values = self::getValuesPost();
-        if (isset($values) && !empty($values)) {
 
-            $sql = QueriesDAO::addDataFirebase($values);
-            return $json;
+        if (self::addFirebaseUsers()) {
+            return array(
+                'success' => 1,
+                'response' =>
+                    array(
+                        "data" => 'Usuario Añadido'
+                    ),
+            );
+        }
+    }
+
+    protected function addFirebaseUsers()
+    {
+        $json = array();
+        // Process Init
+        //$values = self::getValuesPost();
+        $values = $_POST["data"];
+
+        $decodeJSON = JsonHandler::decode($values, true);
+        if (isset($decodeJSON) && !empty($decodeJSON)) {
+            $data = [];
+
+            $values = JsonHandler::decode($decodeJSON, true);
+            $values = $values["DataUser"];
+
+
+            $data["idFirebase"] = $values["firebase_id"];
+            $data["idEmail"] = $values["firebase_email"];
+
+            $checkUser = ($values["firebase_auth"] == 1);
+            $data["temp"] = (int)!$checkUser;
+            $data["isUser"] = (int)$checkUser;
+
+            $values["DataUser"] = $data;
+
+            $sql = QueriesDAO::addDataFirebase($values, "DataUser");
+
+            // Reset
+            $data = [];
+            return (!self::getGeneralConnection()->db_exec('query', $sql));// {
+            //$json['success'] = (int)true;
+            //$data['data'] = 'Complete';
+            /*
+        }else{
+            $json['error'] = (int) true;
+            $data['data'] = 'Error SQL '.$sql;
+        }
+        $json["response"] = $data;
+        return $json;*/
         } else {
             return null;
         }
@@ -85,13 +130,14 @@ class Autoload
     protected function getValuesPost($key = "data", $keyTwo = "data")
     {
         $values = $_POST[$key];
-        $decodeJSON = JsonHandler::decode($values, true);
 
+        $decodeJSON = JsonHandler::decode($values, true);
         // Convert JSON string to Array
-        $values = "{" . $decodeJSON[$keyTwo] . "}";
-        $someArray = JsonHandler::decode($values, true);
+        $decodeJSON = JsonHandler::decode($decodeJSON, true);
+        //$values = $decodeJSON[$keyTwo];
+        //$decodeJSON = JsonHandler::decode($values, true);
         // Dump all data of the Array
-        return ($someArray);
+        return ($decodeJSON);
     }
 
     protected function getConnection()
