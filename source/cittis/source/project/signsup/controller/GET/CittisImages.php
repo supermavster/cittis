@@ -5,7 +5,7 @@ class CittisImages
 {
 
     public $projectLocation = "cittis";
-    public $locationFolder = "source/project/singsup/wwwroot/images";
+    public $locationFolder = "source/project/signsup/wwwroot/images/";
 
     public $code = "";
     public $idImage = "";

@@ -200,14 +200,14 @@ class Autoload
     protected function uploadAllSignals()
     {
         $signal = new Signal(self::getDataBase(), self::getGeneralConnection());
-        return $signal->uploadAllSignals();
+        return array("data" => $signal->uploadAllSignals());
         //return $signal->printValue();
     }
 
     protected function uploadSignal()
     {
         $signal = new Signal(self::getDataBase(), self::getGeneralConnection());
-        return $signal->uploadSignal();
+        return array("data" => $signal->uploadSignal());
         //return $signal->printValue();
     }
 

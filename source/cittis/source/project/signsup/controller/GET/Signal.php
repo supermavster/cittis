@@ -19,6 +19,7 @@ class Signal
         "preventivesigns" => "senales-de-transito-preventivas-fotos",
         "regulatorysigns" => "senales-de-transito-reglamentarias-fotos",
         "touristsigns" => "senales-informativas-turisticas-fotos",
+        "anothersigns" => "otras"
     );
     private $tablesImagesDB = array(
         "stretchsigns",
@@ -30,6 +31,7 @@ class Signal
         "regulatorysigns",
         "servicessigns",
         "touristsigns",
+        "anothersigns"
     );
 
     public function __construct($connection, $generalConnection)
@@ -65,6 +67,8 @@ class Signal
                         $newName = (str_replace("ã±", "n", $newName));
                         $newName = strtoupper(str_replace(" ", "-", $newName));
                         $newName = (str_replace(".PNG", ".png", $newName));
+                        $newName = (str_replace(".JPG", ".png", $newName));
+                        $newName = (str_replace(".jpg", ".png", $newName));
                         rename($oldName, $newName);
                     }
                 }
@@ -72,11 +76,15 @@ class Signal
             }
             // Fix Lado
             //$tableSelected = "lado";
-            //$sqlMain = QueriesDAO::addLado();
-            !self::getDataBase()->db_exec('query', "SET FOREIGN_KEY_CHECKS=0;");
-            //$sqlMain = QueriesDAO::truncateTable($tableSelected);//!self::getDataBase()->db_exec('query', $sql);
-            //if (!self::getDataBase()->db_exec('query', $sqlMain)) {
-            self::getDataBase()->db_exec('query', "SET FOREIGN_KEY_CHECKS=1;");
+            /*/$sqlMain = QueriesDAO::addLado();
+            self::getDataBase()->db_exec('query', "SET FOREIGN_KEY_CHECKS=0;");
+            foreach ($this->tablesImagesDB as $tableSelected) {
+                $sqlMain = QueriesDAO::truncateTable($tableSelected);//!self::getDataBase()->db_exec('query', $sql);
+                if (!self::getDataBase()->db_exec('query', $sqlMain)) {
+
+                }
+            }
+            self::getDataBase()->db_exec('query', "SET FOREIGN_KEY_CHECKS=1;");*/
             return "Datos subidos";
             //}
         }
@@ -101,11 +109,18 @@ class Signal
                 $newName = (str_replace("ã±", "n", $newName));
                 $newName = strtoupper(str_replace(" ", "-", $newName));
                 $newName = (str_replace(".PNG", ".png", $newName));
+                $newName = (str_replace(".jpg", ".png", $newName));
+                $newName = (str_replace(".JPG", ".png", $newName));
                 rename($oldName, $newName);
             }
         }
-        uploadDataIMG($valueMain, $fileFolder, $files, $this->locationFolderMainImages, self::getDataBase());
-        return "Subido Correctamente";
+        $dataUpload = uploadDataIMG($valueMain, $fileFolder, $files, $this->locationFolderMainImages, self::getDataBase());
+        if ($dataUpload) {
+            return "Subido Correctamente";
+        } else {
+            return "Error de Datos";
+        }
+
     }
 
     public function getSignal($signal)
@@ -245,7 +260,7 @@ function makeImagesMain($response)
 function getListFiles($directory, $recursive = false)
 {
     $res = array();
-    if (substr($directory, -1) != "/") {
+    if (substr(trim($directory), -1) != "/") {
         $directory .= "/";
     }
     $dir = @dir($directory) or die("error al abrir");
@@ -287,6 +302,7 @@ function uploadDataIMG($upload, $fileFolder, $files, $locationFolderMainImages, 
         }
     }
 
+
     $arrayValues = array();
     //Get table imgs on DB
     foreach ($files as $key => $valueTemp) {
@@ -308,22 +324,17 @@ function uploadDataIMG($upload, $fileFolder, $files, $locationFolderMainImages, 
     }
     // Set values
     $idTable = $connection->db_exec('fetch_row', MainQueriesDAO::getIDTable($tableSelected))[0];
-    // GEt data
-    if ($tableSelected == 'interpng') {
-        $sqlMain = QueriesDAO::addInter($arrayValues);
-    } elseif ($tableSelected == 'tramopng') {
-        $sqlMain = QueriesDAO::addTramo($arrayValues);
-
-    } else {
+    // Get data
         $sqlMain = QueriesDAO::addImageValues($tableSelected, $idTable, $arrayValues);
-    }
     //truncate Table
-    !$connection->db_exec('query', "SET FOREIGN_KEY_CHECKS=0;");
+    $connection->db_exec('query', "SET FOREIGN_KEY_CHECKS=0;");
+
+    echo $tableSelected . "\n";
     $sql = MainQueriesDAO::truncateTable($tableSelected);
-    !$connection->db_exec('query', $sql);
+    $connection->db_exec('query', $sql);
 
     if (!$connection->db_exec('query', $sqlMain)) {
         $connection->db_exec('query', "SET FOREIGN_KEY_CHECKS=1;");
-        echo "Datos subidos $sqlMain <br/><hr/>";
+        return true;//"Datos subidos $sqlMain <br/><hr/>";
     }
 }

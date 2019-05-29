@@ -507,8 +507,6 @@ WHERE
     }
 
 
-
-
     /** Only Municipios
      * @param $idUserFirebase
      * @return string
@@ -612,15 +610,83 @@ WHERE
     protected function getValues($values, $idArray, $short = 1)
     {
         $sql = "";
-        $values = $values[$idArray];
+        if ($idArray != null) {
+            $values = $values[$idArray];
+        }
         $tempValue = 0;
         foreach ($values as $valor) {
-            $sql .= "'$valor'";
+            if ($idArray != null) {
+                $sql .= "'$valor'";
+            } else {
+                $sql .= "'" . $valor['id'] . "'";
+            }
             if ($tempValue++ == (count($values) - $short)) {
                 $sql .= ");";
                 break;
             } else {
-                $sql .= ",";
+                if ($idArray == null) {
+                    $sql .= "),(";
+                } else {
+
+                    $sql .= ",";
+                }
+            }
+        }
+        return $sql;
+    }
+
+
+    /** Add Inter *
+     * @param $table
+     * @param $id
+     * @param $values
+     * @return string
+     */
+    final static function addImageValues($table, $id, $values)
+    {
+        $sql = "INSERT INTO `$table` (`$id`) VALUES (";
+        $sql .= self::getValues($values, null);
+
+        return $sql;
+    }
+
+
+    /** Add Inter *
+     * @param $values
+     * @param $values
+     * @return string
+     * /
+     * final static function addInter($values)
+     * {
+     * return "INSERT INTO `interpng`(`IdInI`, `NomInI`, `Ruta`) VALUES ".self::addValues($values,true);
+     * }
+     *
+     *
+     * /** Add Tramo
+     * @return string
+     * /
+     * final static function addTramo($values)
+     * {
+     * return "INSERT INTO `tramopng`(`IdTrI`, `NombreTri`, `Ruta`) VALUES ".self::addValues($values,true);
+     * }
+     *
+     * /***/
+    private function addValues($values, $three = false)
+    {
+        $sql = "";
+        if (is_array($values)) {
+            $i = 0;
+            foreach ($values as $key => $value) {
+                $sql .= "('" . $value['id'] . "', '" . $value['ruta'] . "'";
+                if ($three) {
+                    $sql .= ",'" . $value['ruta'] . "'";
+                }
+                $sql .= ")";
+                if ($i++ != count($values) - 1) {
+                    $sql .= ",";
+                } else {
+                    $sql .= ";";
+                }
             }
         }
         return $sql;
