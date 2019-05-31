@@ -127,6 +127,7 @@ class Signal
     {
         $response = array();
         // Main Names Table
+
         foreach ($this->tablesImagesDB as $key => $value) {
             if (like_match("%" . $signal . "%", $value)) {
                 // Name of the Table & Folder Location Images
@@ -142,11 +143,13 @@ class Signal
         $tempID = getRequest("code") ? getRequest("code") : "";
         // Send Table and ID
         $table = $response['tableMain'];
-        $idTable = self::getGeneralConnection()->db_exec('fetch_row', MainQueriesDAO::getIDTable($table))[0];
-        $countElements = self::getDataBase()->db_exec('num_rows', QueriesDAO::checkID($table, $idTable, $tempID));
+        $idTable = self::getDataBase()->db_exec('fetch_row', MainQueriesDAO::getIDTable($table))[0];
+
+
+        $countElements = self::getDataBase()->db_exec('num_rows', MainQueriesDAO::checkID($table, $idTable, $tempID));
 
         if ($countElements > 0) {
-            $tempElements = self::getDataBase()->db_exec('fetch_array', QueriesDAO::checkID($table, $idTable, $tempID));
+            $tempElements = self::getDataBase()->db_exec('fetch_array', MainQueriesDAO::checkID($table, $idTable, $tempID));
 
             foreach ($tempElements as $key => $value) {
                 $response['code'] = $value[$idTable];
@@ -234,7 +237,7 @@ class Signal
     {
         // Print Elements
         //showElements($this->arrayImages);
-        return $this->arrayImages;
+        return array("data" => $this->arrayImages);
     }
 
 }

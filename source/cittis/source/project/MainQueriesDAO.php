@@ -39,6 +39,18 @@ class MainQueriesDAO
         return "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME LIKE '%Id%' AND TABLE_NAME LIKE '%$table%' LIMIT 1";
     }
 
+    /** Check ID
+     * @param $table
+     * @param $idFromtheTable
+     * @param $id
+     * @return string
+     */
+    final static function checkID($table, $idFromtheTable, $id)
+    {
+        if (isset($id)) $withID = "LIKE '%" . $id . "%'";
+        return "Select * FROM `" . $table . "` WHERE `" . $idFromtheTable . "` $withID";
+    }
+
     /** Truncate Table
      * @param $table
      * @return string

@@ -65,6 +65,7 @@ LimitRequestBody 10240000
 
     # App
         RewriteRule ^app$ cittis/app/index.php
+        RewriteRule ^upload-files$ cittis/app/UploadFiles.php
 
     # Evitar escaneos y cualquier intento de manipulación malintencionada de la URL. Con esta regla es imposible lanzar ataques de inyección (SQL, XSS, etc)
         RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
